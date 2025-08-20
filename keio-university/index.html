@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>慶桜大学 - エレガントなサボリとモーフィスの最高学府</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #8b0000;
+            --secondary-color: #f8d568;
+            --accent-color: #4b0082;
+            --light-color: #f8f9fa;
+            --dark-color: #333;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+            font-family: 'Noto Serif SC', serif;
+            transition: all 0.3s ease;
+        }
+        
+        body.japanese {
+            font-family: 'Noto Serif JP', serif;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #660000 100%);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #ffec8b 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            border: 3px solid #fff;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-img::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8) 1%, transparent 10%),
+                        radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.8) 1%, transparent 10%),
+                        radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.8) 2%, transparent 15%);
+        }
+        
+        .logo-img i {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            z-index: 1;
+        }
+        
+        .logo-text {
+            color: #fff;
+        }
+        
+        .logo-text h1 {
+            font-size: 2.2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .logo-text p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        /* 导航栏 */
+        nav {
+            background-color: #990000;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+        }
+        
+        .nav-links li {
+            margin: 0 20px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 语言切换 */
+        .language-switcher {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px 0;
+            background-color: #f1f1f1;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .lang-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin: 0 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .lang-btn:hover {
+            background: #660000;
+        }
+        
+        /* 主横幅 */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero-content {
+            position: relative;
+            width: 100%;
+            padding: 0 20px;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* 内容区域 */
+        .section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: var(--primary-color);
+        }
+        
+        /* 专业介绍 */
+        .majors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .major-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .major-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .major-img {
+            height: 200px;
+            background-color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+        
+        .major-content {
+            padding: 20px;
+        }
+        
+        .major-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        /* 新闻区域 */
+        .news-container {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+        
+        .news-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .news-item:last-child {
+            border-bottom: none;
+        }
+        
+        .news-date {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        /* 页脚 */
+        footer {
+            background: #330000;
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .disclaimer {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 10px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 语言切换器 -->
+    <div class="language-switcher container">
+        <button class="lang-btn" id="lang-zh">中文</button>
+        <button class="lang-btn" id="lang-ja">日本語</button>
+    </div>
+
+    <!-- 头部 -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-img">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <div class="logo-text">
+                    <h1 id="header-title">慶桜大学</h1>
+                    <p id="header-subtitle">エレガントなサボリとモーフィスの最高学府</p>
+                </div>
+            </div>
+            <div class="header-cta">
+                <button class="lang-btn" id="header-button">入学お問い合わせ</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 导航 -->
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="#" id="nav-home">ホーム</a></li>
+                <li><a href="#" id="nav-about">大学紹介</a></li>
+                <li><a href="#" id="nav-programs">学科・専攻</a></li>
+                <li><a href="#" id="nav-admissions">入学案内</a></li>
+                <li><a href="#" id="nav-campus">キャンパス生活</a></li>
+                <li><a href="#" id="nav-contact">お問い合わせ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主横幅 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2 id="hero-title">慶桜大学で、優雅な学生生活を究める</h2>
+            <p id="hero-text">日本初のサボリ技術とモーフィス学に特化した高等教育機関。効率的な学習回避法と創造的な時間活用術を伝授します。</p>
+        </div>
+    </section>
+
+    <!-- 大学介绍 -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title" id="about-title">大学紹介</h2>
+            <div class="news-container">
+                <p id="about-text1">慶桜大学は1798年、学生生活の達人である遊学三郎博士によって設立されました。博士は「真の教育とは、如何に効率的に学ばずして単位を取得するかである」という理念のもと、優雅な学生生活を送るための技術を研究する教育機関の必要性を訴え続けました。</p>
+                <p id="about-text2">現在では、サボリ工学部、モーフィス学部、単位取得学部の3学部15学科を有する総合大学へと発展。世界各国から集まった学生たちが、効率的な学習回避法と創造的な時間活用術を修得し、卒業後はさまざまな業界で活躍しています。</p>
+                <p id="about-text3">キャンパス内には日本有数の「居眠り研究室」と「携帯電話いじり施設」を備え、学生は在学中から実践的な技術を磨くことができます。また、提携する世界中のカフェやゲームセンターでのインターンシッププログラムも充実しています。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 专业介绍 -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title" id="programs-title">人気の専攻</h2>
+            <div class="majors">
+                <div class="major-card">
+                    <div class="major-img"><i class="fas fa-bed"></i></div>
+                    <div class="major-content">
+                        <h3 id="major1-title">エレガントサボリ専攻</h3>
+                        <p id="major1-text">教授に気づかれない完璧な欠席理由の創作技術から、友人による代返システムの構築まで、優雅に授業をサボるための総合的なスキルを学びます。</p>
+                    </div>
+                </div>
+                <div class="major-card">
+                    <div class="major-img"><i class="fas fa-smoking"></i></div>
+                    <div class="major-content">
+                        <h3 id="major2-title">モーフィス科学専攻</h3>
+                        <p id="major2-text">長時間のスマホ操作、SNS巡回、堂々とした居眠りなど、授業中にバレずに時間を浪費する先進的技術を理論と実践の両面から研究します。</p>
+                    </div>
+                </div>
+                <div class="major-card">
+                    <div class="major-img"><i class="fas fa-copy"></i></div>
+                    <div class="major-content">
+                        <h3 id="major3-title">単位取得学専攻</h3>
+                        <p id="major3-text">最小の努力で最大の単位を取得する技術を追求。過去問分析技術、レポートコピペ検出回避法、一夜漬け記憶術など、優雅に卒業するための技能を修得します。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 新闻 -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title" id="news-title">ニュース</h2>
+            <div class="news-container">
+                <div class="news-item">
+                    <span class="news-date">2025.10.15</span>
+                    <span id="news1">モーフィス科学研究科の田中教授が「第10回国際サボリ大会」で最優秀奖を受賞</span>
+                </div>
+                <div class="news-item">
+                    <span class="news-date">2024.10.08</span>
+                    <span id="news2">サボリ工学部とLINEが共同研究施設「ながらスマホラボ」を開設</span>
+                </div>
+                <div class="news-item">
+                    <span class="news-date">2023.09.30</span>
+                    <span id="news3">学生プロデュースのイベント「優雅な単位取得セミナー」を開催、一般参加も可能</span>
+                </div>
+                <div class="news-item">
+                    <span class="news-date">2023.09.20</span>
+                    <span id="news4">エレガントサボリ専攻の学生が「日本サボリ技術コンペティション」で優勝</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 id="contact-title">お問い合わせ</h3>
+                    <p id="contact-address">〒150-0043 東京都渋谷区桜丘1-1-1</p>
+                    <p>Tel: 03-1234-5678</p>
+                    <p>Email: info@keio-sakura-univ.ac.jp</p>
+                </div>
+                <div class="footer-section">
+                    <h3 id="links-title">関連リンク</h3>
+                    <p><a href="#" style="color: #ffd700;" id="link1">入試情報</a></p>
+                    <p><a href="#" style="color: #ffd700;" id="link2">キャンパスツアー</a></p>
+                    <p><a href="#" style="color: #ffd700;" id="link3">就職・進路情報</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3 id="social-title">ソーシャルメディア</h3>
+                    <p><a href="#" style="color: #ffd700;"><i class="fab fa-twitter"></i> Twitter</a></p>
+                    <p><a href="#" style="color: #ffd700;"><i class="fab fa-facebook"></i> Facebook</a></p>
+                    <p><a href="#" style="color: #ffd700;"><i class="fab fa-instagram"></i> Instagram</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 慶桜大学. All Rights Reserved.</p>
+                <p class="disclaimer" id="disclaimer">本网站はパロディであり、慶應義塾大学とは一切関係ありません。純粋なエンターテインメント目的で作成されています。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 语言切换功能
+        document.getElementById('lang-zh').addEventListener('click', function() {
+            changeLanguage('zh');
+            document.body.classList.remove('japanese');
+        });
+
+        document.getElementById('lang-ja').addEventListener('click', function() {
+            changeLanguage('ja');
+            document.body.classList.add('japanese');
+        });
+
+        // 文本内容
+        const translations = {
+            'zh': {
+                'header-title': '庆樱大学',
+                'header-subtitle': '优雅翘课与摸鱼的最高学府',
+                'header-button': '入学咨询',
+                'nav-home': '首页',
+                'nav-about': '大学介绍',
+                'nav-programs': '学科专业',
+                'nav-admissions': '招生信息',
+                'nav-campus': '校园生活',
+                'nav-contact': '联系我们',
+                'hero-title': '在庆樱大学，探索优雅的学生生活',
+                'hero-text': '日本首家专注于翘课技术与摸鱼学的高等教育机构。传授高效的学习回避法与创造性的时间活用术。',
+                'about-title': '大学介绍',
+                'about-text1': '庆樱大学成立于1798年，由学生生活达人游学三郎博士创立。博士基于"真正的教育在于如何高效地不学习而取得学分"的理念，一直呼吁需要建立研究优雅学生生活技术的教育机构。',
+                'about-text2': '现在已发展成为拥有翘课工学部、摸鱼学部、学分取得学部3个学部15个学科的综合大学。来自世界各国的学生在这里学习高效的学习回避法与创造性的时间活用术，毕业后在各个行业活跃。',
+                'about-text3': '校园内设有日本数一数二的"打瞌睡研究室"和"玩手机设施"，学生在校期间即可磨练实践性技术。此外，还与全球的咖啡馆和游戏中心合作，提供丰富的实习项目。',
+                'programs-title': '热门专业',
+                'major1-title': '优雅翘课专业',
+                'major1-text': '从创作不被教授发现的完美缺勤理由，到构建朋友代答系统，学习优雅翘课的综合技能。',
+                'major2-title': '摸鱼科学专业',
+                'major2-text': '从理论和实践两方面研究长时间玩手机、刷SNS、坦然打瞌睡等课堂上不被发现浪费时间的高级技术。',
+                'major3-title': '学分取得学专业',
+                'major3-text': '追求以最小努力获得最多学分的技术。学习往年试题分析技术、论文抄袭检测回避法、临阵磨枪记忆术等优雅毕业所需的技能。',
+                'news-title': '新闻',
+                'news1': '摸鱼科学研究科的田中教授在"第10届国际翘课大会"中获得最优秀奖',
+                'news2': '翘课工学部与LINE共同设立研究设施"边玩手机实验室"',
+                'news3': '举办学生策划的活动"优雅取得学分讲座"，欢迎外部参加',
+                'news4': '优雅翘课专业学生在"日本翘课技术大赛"中获得冠军',
+                'contact-title': '联系我们',
+                'contact-address': '〒150-0043 东京都涩谷区樱丘1-1-1',
+                'links-title': '相关链接',
+                'link1': '招生信息',
+                'link2': '校园参观',
+                'link3': '就业方向信息',
+                'social-title': '社交媒体',
+                'disclaimer': '本网站是恶搞 parody 网站，与庆应义塾大学没有任何关系。纯粹以娱乐目的创建。'
+            },
+            'ja': {
+                'header-title': '慶桜大学',
+                'header-subtitle': 'エレガントなサボリとモーフィスの最高学府',
+                'header-button': '入学お問い合わせ',
+                'nav-home': 'ホーム',
+                'nav-about': '大学紹介',
+                'nav-programs': '学科・専攻',
+                'nav-admissions': '入学案内',
+                'nav-campus': 'キャンパス生活',
+                'nav-contact': 'お問い合わせ',
+                'hero-title': '慶桜大学で、優雅な学生生活を究める',
+                'hero-text': '日本初のサボリ技術とモーフィス学に特化した高等教育機関。効率的な学習回避法と創造的な時間活用術を伝授します。',
+                'about-title': '大学紹介',
+                'about-text1': '慶桜大学は1798年、学生生活の達人である遊学三郎博士によって設立されました。博士は「真の教育とは、如何に効率的に学ばずして単位を取得するかである」という理念のもと、優雅な学生生活を送るための技術を研究する教育機関の必要性を訴え続けました。',
+                'about-text2': '現在では、サボリ工学部、モーフィス学部、単位取得学部の3学部15学科を有する総合大学へと発展。世界各国から集まった学生たちが、効率的な学習回避法と創造的な時間活用術を修得し、卒業後はさまざまな業界で活躍しています。',
+                'about-text3': 'キャンパス内には日本有数の「居眠り研究室」と「携帯電話いじり施設」を備え、学生は在学中から実践的な技術を磨くことができます。また、提携する世界中のカフェやゲームセンターでのインターンシッププログラムも充実しています。',
+                'programs-title': '人気の専攻',
+                'major1-title': 'エレガントサボリ専攻',
+                'major1-text': '教授に気づかれない完璧な欠席理由の創作技術から、友人による代返システムの構築まで、優雅に授業をサボるための総合的なスキルを学びます。',
+                'major2-title': 'モーフィス科学専攻',
+                'major2-text': '長時間のスマホ操作、SNS巡回、堂々とした居眠りなど、授業中にバレずに時間を浪費する先進的技術を理論と実践の両面から研究します。',
+                'major3-title': '単位取得学専攻',
+                'major3-text': '最小の努力で最大の単位を取得する技術を追求。過去問分析技術、レポートコピペ検出回避法、一夜漬け記憶術など、優雅に卒業するための技能を修得します。',
+                'news-title': 'ニュース',
+                'news1': 'モーフィス科学研究科の田中教授が「第10回国際サボリ大会」で最優秀奖を受賞',
+                'news2': 'サボリ工学部とLINEが共同研究施設「ながらスマホラボ」を開設',
+                'news3': '学生プロデュースのイベント「優雅な単位取得セミナー」を開催、一般参加も可能',
+                'news4': 'エレガントサボリ専攻の学生が「日本サボリ技術コンペティション」で優勝',
+                'contact-title': 'お問い合わせ',
+                'contact-address': '〒150-0043 東京都渋谷区桜丘1-1-1',
+                'links-title': '関連リンク',
+                'link1': '入試情報',
+                'link2': 'キャンパスツアー',
+                'link3': '就職・進路情報',
+                'social-title': 'ソーシャルメディア',
+                'disclaimer': '本网站はパロディであり、慶應義塾大学とは一切関係ありません。純粋なエンターテインメント目的で作成されています。'
+            }
+        };
+
+        function changeLanguage(lang) {
+            document.querySelectorAll('[id]').forEach(element => {
+                const id = element.id;
+                if (translations[lang][id]) {
+                    element.textContent = translations[lang][id];
+                }
+            });
+        }
+
+        // 默认加载日文
+        window.onload = function() {
+            changeLanguage('ja');
+            document.body.classList.add('japanese');
+        };
+    </script>
+</body>
+</html>
