@@ -2331,7 +2331,7 @@ z"/>
             <div class="alumni-wall-container glass-effect">
                 <div class="count-control">
                     <label for="nameCount" id="alumni-count-label">表示数量:</label>
-                    <input type="number" id="nameCount" min="1" max="100" value="35">
+                    <input type="number" id="nameCount" min="1" max="100" value="40">
                 </div>
                 <div class="fixed-note" id="fixed-note">※ 金色枠の名前は優秀卒業生です</div>
                 <div class="alumni-wall" id="alumniWall">
@@ -2685,7 +2685,7 @@ z"/>
     
     // 根据屏幕大小调整默认显示数量
     if (window.innerWidth <= 768) {
-        nameCount = Math.min(nameCount, 21); // 在移动设备上限制最大数量
+        nameCount = Math.min(nameCount, 24); // 在移动设备上限制最大数量
     }
     
     // 限制数量在1-100之间
