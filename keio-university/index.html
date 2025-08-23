@@ -2942,7 +2942,7 @@ z"/>
         window.addEventListener('resize', function() {
 			// 只在宽度变化超过50px时才重新初始化
             const currentWidth = window.innerWidth;
-            if (Math.abs(currentWidth - lastWindowWidth) > 50) {
+            if (Math.abs(currentWidth - lastWindowWidth) > 50) 
                 lastWindowWidth = currentWidth;
             // 添加防抖处理，避免频繁触发
             if (this.resizeTimer) clearTimeout(this.resizeTimer);
