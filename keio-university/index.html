@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>慶桜大学 - エレガントなサボリとモーフィスの最高学府</title>
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -577,53 +578,6 @@
             margin-top: 10px;
         }
         
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .logo {
-                margin-bottom: 15px;
-            }
-            
-            .nav-links {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .nav-links li {
-                margin: 10px 0;
-            }
-            
-            .hero h2 {
-                font-size: 2rem;
-            }
-            
-            .hero p {
-                font-size: 1.2rem;
-            }
-            
-            .message-container {
-                padding: 30px 20px;
-            }
-            
-            .message-container::before {
-                font-size: 5rem;
-                top: 10px;
-                left: 15px;
-            }
-            
-            .campus-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .alumni-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
         /* ===== 新增校友墙样式 ===== */
         .alumni-wall-container {
             background: white;
@@ -819,23 +773,156 @@
             background-color: #7a1f1f;
         }
 
-        /* 响应式调整 */
-        @media (max-width: 480px) {
-            .simple-modal {
+        /* 响应式设计 - 手机端优化 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .message-container {
                 padding: 30px 20px;
-                width: 95%;
             }
             
-            .modal-title {
-                font-size: 20px;
+            .message-container::before {
+                font-size: 5rem;
+                top: 10px;
+                left: 15px;
             }
             
-            .modal-message {
+            .campus-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .alumni-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* 校友墙容器调整 */
+            .alumni-wall-container {
+                padding: 20px 15px;
+                margin-top: 20px;
+                min-height: 450px;
+            }
+            
+            .alumni-wall {
+                height: 400px; /* 降低高度适应小屏幕 */
+            }
+            
+            /* 控制元素垂直排列 */
+            .count-control {
+                flex-direction: column;
+                gap: 8px;
+                margin-bottom: 15px;
+            }
+            
+            /* 名字元素大小调整 */
+            .alumni-name {
+                font-size: 12px !important;
+                padding: 4px 8px;
+                border-radius: 2px;
+            }
+            
+            .fixed-name {
+                font-size: 14px !important;
+            }
+            
+            /* 状态文本调整 */
+            .status-text {
+                font-size: 12px;
+                margin-top: 8px;
+            }
+            
+            /* 固定说明文字调整 */
+            .fixed-note {
+                font-size: 12px;
+                margin: 8px 0;
+            }
+            
+            /* 按钮大小调整 */
+            .shuffle-btn {
+                padding: 12px 24px;
                 font-size: 16px;
             }
             
-            .modal-icon {
-                font-size: 50px;
+            /* 输入框大小调整 */
+            .count-control input {
+                width: 80px;
+                padding: 8px;
+                font-size: 16px; /* 增大字体便于触摸 */
+            }
+            
+            /* 标题调整 */
+            .section-title2 {
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+        }
+        
+        /* 超小屏幕设备优化 */
+        @media (max-width: 480px) {
+            .alumni-wall {
+                height: 350px;
+            }
+            
+            .alumni-name {
+                font-size: 11px !important;
+                padding: 3px 6px;
+            }
+            
+            .fixed-name {
+                font-size: 12px !important;
+            }
+            
+            .shuffle-btn {
+                padding: 10px 20px;
+                width: 100%;
+                max-width: 200px;
+            }
+            
+            .alumni-wall-container {
+                min-height: 400px;
+            }
+        }
+        
+        /* 平板设备优化 */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .alumni-wall {
+                height: 500px;
+            }
+        }
+        
+        /* 提高触摸设备友好性 */
+        @media (hover: none) and (pointer: coarse) {
+            .alumni-name {
+                min-width: 60px;
+                min-height: 24px;
+            }
+            
+            .shuffle-btn,
+            .count-control input {
+                min-height: 44px; /* 提高触摸目标尺寸 */
             }
         }
     </style>
@@ -852,9 +939,9 @@
         <div class="container header-content">
             <div class="logo">
                 <div class="logo-shield">
-   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="100%" viewBox="0 0 1024 1024" enable-background="new 0 0 1024 1024" xml:space="preserve">
-      <path fill="#ffffff" opacity="1.000000" stroke="none" 
+<path fill="#ffffff" opacity="1.000000" stroke="none" 
 	d="
 M871.438354,533.282837 
 	C866.773315,565.117981 858.457214,595.522095 846.833984,625.037415 
@@ -2018,8 +2105,7 @@ M337.779846,202.338654
 	C322.175507,158.849289 326.879608,159.550964 329.650696,163.498978 
 	C337.761749,175.054916 341.448242,187.815292 337.779846,202.338654 
 z"/>
-</svg>
-                       
+</svg>                      
                 </div>
                 <div class="logo-text">
                     <h1 id="header-title">慶桜大学</h1>
@@ -2063,7 +2149,7 @@ z"/>
             <div class="news-container glass-effect">
                 <p id="about-text1">慶桜大学は1798年、学生生活の達人である遊学三郎博士によって設立されました。博士は「真の教育とは、如何に効率的に学ばずして単位を取得するかである」という理念のもと、優雅な学生生活を送るための技術を研究する教育機関の必要性を訴え続けました。</p>
                 <p id="about-text2">現在では、サボリ工学部、モーフィス学部、単位取得学部の3学部15学科を有する総合大学へと発展。世界各国から集まった学生たちが、効率的な学習回避法と創造的な時間活用術を修得し、卒業後はさまざまな業界で活躍しています。</p>
-                <p id="about-text3">キャampus内には日本有数の「居眠り研究室」と「携帯電話いじり施設」を備え、学生は在学中から実践적인技術を磨くことができます。また、提携する世界中のカフェやゲームセンターでのインターンシッププログラムも充実しています。</p>
+                <p id="about-text3">キャampus内には日本有数の「居眠り研究室」と「携帯電話いじり施設」を備え、学生は在学中から実践的な技術を磨くことができます。また、提携する世界中のカフェやゲームセンターでのインターンシッププログラムも充実しています。</p>
             </div>
         </div>
     </section>
@@ -2076,10 +2162,10 @@ z"/>
                 <div class="message-content">
                     <p id="president-text1">諸君、慶桜大学へようこそ。</p>
                     <p id="president-text2">本学は1798年の創立以来、一貫して「最小の努力で最大の成果を挙げる」という不文律を教育の根幹に据えてまいりました。世の中には「勤勉」や「努力」を美徳とする大学が数多ありますが、我々は「効率」と「創造的回避」こそが、現代社会を生き抜く真の知恵であると確信しております。</p>
-                    <p id="president-text3">ここ慶桜では、単位取得学の大家たちが、如何にして試験範囲を完璧に予測するかを伝授します。モーフィス科学の権威が、教授の目を欺く至高の居眠り術の数々を披露します。エレガントサボリの達人たちが、誰にもバレずに休講を勝ち取る交渉術を鍛え上げます。</p>
-                    <p id="president-text4">これは決して、不真面目になることを推奨しているのではありません。むしろ、自分の時間を最大限に有効活用し、より豊かな学生生活を送るための「戦略」と「技術」を修得する、極めて真面目な学問なのです。</p>
-                    <p id="president-text5">諸君には、本学で如何にして学ばずして学ぶかを会得し、社会という名なる大海原を悠然と泳ぎ渡るための力を身に付けて欲しいと願っております。</p>
-                    <p id="president-text6">さあ、ともにこの優雅なる学びの時を謳歌しましょう。</p>
+                    <p id="president-text3">ここ慶桜では，単位取得学の大家たちが，如何にして試験範囲を完璧に予測するかを伝授します。モーフィス科学の権威が，教授の目を欺く至高の居眠り術の数々を披露します。エレガントサボリの達人たちが，誰にもバレずに休講を勝ち取る交渉術を鍛え上げます。</p>
+                    <p id="president-text4">これは決して，不真面目になることを推奨しているのではありません。むしろ，自分の時間を最大限に有効活用し，より豊かな学生生活を送るための「戦略」と「技術」を修得する，極めて真面目な学問なのです。</p>
+                    <p id="president-text5">諸君には，本学で如何にして学ばずして学ぶかを会得し，社会という名なる大海原を悠然と泳ぎ渡るための力を身に付けて欲しいと願っております。</p>
+                    <p id="president-text6">さあ，ともにこの優雅なる学びの時を謳歌しましょう。</p>
                 </div>
                 <div class="president-signature">
                     <div id="president-signature">現任学長</div>
@@ -2098,21 +2184,21 @@ z"/>
                     <div class="major-img"><i class="fas fa-bed"></i></div>
                     <div class="major-content">
                         <h3 id="major1-title">エレガントサボリ専攻</h3>
-                        <p id="major1-text">教授に気づかれない完璧な欠席理由の創作技術から、友人による代返システムの構築まで、優雅に授業をサボるための総合的なスキルを学びます。</p>
+                        <p id="major1-text">教授に気づかれない完璧な欠席理由の創作技術から，友人による代返システムの構築まで，優雅に授業をサボるための総合的なスキルを学びます。</p>
                     </div>
                 </div>
                 <div class="major-card glass-effect">
                     <div class="major-img"><i class="fas fa-fish"></i></div>
                     <div class="major-content">
                         <h3 id="major2-title">モーフィス科学専攻</h3>
-                        <p id="major2-text">長時間のスマホ操作、SNS巡回、堂々とした居眠りなど、授業中にバレずに時間を浪費する先進的技術を理論と実践の両面から研究します。</p>
+                        <p id="major2-text">長時間のスマホ操作，SNS巡回，堂々とした居眠りなど，授業中にバレずに時間を浪費する先進的技術を理論と実践の両面から研究します。</p>
                     </div>
                 </div>
                 <div class="major-card glass-effect">
                     <div class="major-img"><i class="fas fa-copy"></i></div>
                     <div class="major-content">
                         <h3 id="major3-title">単位取得学専攻</h3>
-                        <p id="major3-text">最小の努力で最大の単位を取得する技術を追求。過去問分析技術、レポートコピペ検出回避法、一夜漬け記憶術など、優雅に卒業するための技能を修得します。</p>
+                        <p id="major3-text">最小の努力で最大の単位を取得する技術を追求。過去問分析技術，レポートコピペ検出回避法，一夜漬け記憶術など，優雅に卒業するための技能を修得します。</p>
                     </div>
                 </div>
             </div>
@@ -2157,7 +2243,7 @@ z"/>
                     <div class="campus-feature">
                         <div class="campus-icon"><i class="fas fa-couch"></i></div>
                         <h3 id="campus1-title">居眠り研究室</h3>
-                        <p id="campus1-desc">最新の睡眠モニタリングシステムを備え、教授にバレない完璧な居眠り姿勢を研究します。人体工学に基づいた最高の居眠り椅子を完備。</p>
+                        <p id="campus1-desc">最新の睡眠モニタリングシステムを備え，教授にバレない完璧な居眠り姿勢を研究します。人体工学に基づいた最高の居眠り椅子を完備。</p>
                     </div>
                     <div class="campus-feature">
                         <div class="campus-icon"><i class="fas fa-mobile-alt"></i></div>
@@ -2167,15 +2253,15 @@ z"/>
                     <div class="campus-feature">
                         <div class="campus-icon"><i class="fas fa-coffee"></i></div>
                         <h3 id="campus3-title">カフェテリア</h3>
-                        <p id="campus3-desc">単位取得に疲れた学生のための癒し空間。無料のエナジードリンクと、教授の目を欺くための偽装勉強道具のレンタルサービスあり。</p>
+                        <p id="campus3-desc">単位取得に疲れた学生のための癒し空間。無料のエナジードリンクと，教授の目を欺くための偽装勉強道具のレンタルサービスあり。</p>
                     </div>
                 </div>
 
                 <!-- 学生代表发言 -->
                 <div class="student-message glass-effect">
                     <div class="student-content">
-                        <p id="student-text1">「慶桜大学に入学して、時間の有効活用というものを本当の意味で学びました。教授の視線をかわしながらSNSをチェックする技術や、出席簿に印をつけてもらうための微細なうなずきの技術など、どれも実践性で社会に出てからも役立つものばかりです。」</p>
-                        <p id="student-text2">「特にモーフィス科学実習では、教授がこちらに向いている時にだけ真面目な顔をする『 selective attention technique 』を習得。アルバイト先でもお客様の気を引くのに応用でき、時給アップにつながりました！」</p>
+                        <p id="student-text1">「慶桜大学に入学して，時間の有効活用というものを本当の意味で学びました。教授の視線をかわしながらSNSをチェックする技術や，出席簿に印をつけてもらうための微細なうなずきの技術など，どれも実践性で社会に出てからも役立つものばかりです。」</p>
+                        <p id="student-text2">「特にモーフィス科学実習では，教授がこちらに向いている時にだけ真面目な顔をする『 selective attention technique 』を習得。アルバイト先でもお客様の気を引くのに応用でき，時給アップにつながりました！」</p>
                     </div>
                     <div class="student-signature">
                         <p id="student-signature">エレガントサボリ専攻 3年</p>
@@ -2197,14 +2283,14 @@ z"/>
                         <h3 class="alumni-name0" id="alumni1-name">Haru</h3>
                         <p class="alumni-year" id="alumni1-year">2012年卒業</p>
                         <p class="alumni-title" id="alumni1-major">モーフィス科学専攻</p>
-                        <p class="alumni-quote" id="alumni1-quote">「慶桜大学で学んだ効率的な時間活用術は、現在のコンサルタント業務で大いに役立っています。特に、会議中のスマホ操作テクニックは、クライアントとの打ち合わせでも応用可能です。」</p>
+                        <p class="alumni-quote" id="alumni1-quote">「慶桜大学で学んだ効率的な時間活用術は，現在のコンサルタント業務で大いに役立っています。特に，会議中のスマホ操作テクニックは，クライアントとの打ち合わせでも応用可能です。」</p>
                     </div>
                     <div class="alumni-card">
                         <div class="alumni-avatar"><i class="fas fa-user-graduate"></i></div>
                         <h3 class="alumni-name0" id="alumni2-name">Jackson</h3>
                         <p class="alumni-year" id="alumni2-year">2009年卒業</p>
                         <p class="alumni-title" id="alumni2-major">エレガントサボリ専攻</p>
-                        <p class="alumni-quote" id="alumni2-quote">「大学で習得した創造的な欠席理由作成スキルは、現在のマーケティング職でクリエイティブな企画を考える際の基礎となっています。どんな状況でも突破口を見つける慶桜の精神は、ビジネスの世界でも通用します。」</p>
+                        <p class="alumni-quote" id="alumni2-quote">「大学で習得した創造的な欠席理由作成スキルは，現在のマーケティング職でクリエイティブな企画を考える際の基礎となっています。どんな状況でも突破口を見つける慶桜の精神は，ビジネスの世界でも通用します。」</p>
                     </div>
                 </div>
             </div>
@@ -2245,7 +2331,7 @@ z"/>
                 </div>
                 <div class="news-item">
                     <span class="news-date">2023.09.30</span>
-                    <span id="news3">学生プロデュースのイベント「優雅な単位取得セミナー」を開催、一般参加も可能</span>
+                    <span id="news3">学生プロデュースのイベント「優雅な単位取得セミナー」を開催，一般参加も可能</span>
                 </div>
                 <div class="news-item">
                     <span class="news-date">2023.09.20</span>
@@ -2285,7 +2371,7 @@ z"/>
                 <a href="https://www.monoko.jp" target="_blank" style="color: #ffd700;">Haru</a>
             </p>
                 <p>&copy; 2025 慶桜大学. All Rights Reserved.</p>
-                <p class="disclaimer" id="disclaimer">このサイトはパロディであり、慶應義塾大学とは一切関係ありません。純粋なエンターテインメント目的で作成されています。</p>
+                <p class="disclaimer" id="disclaimer">このサイトはパロディであり，慶應義塾大学とは一切関係ありません。純粋なエンターテインメント目的で作成されています。</p>
             </div>
         </div>
     </footer>
@@ -2298,7 +2384,7 @@ z"/>
                 <i class="fas fa-graduation-cap"></i>
             </div>
             <h2 class="modal-title" id="modal-title">入学資格審査結果</h2>
-            <p class="modal-message" id="modal-message">君は優秀で、入学資格を獲得しました！</p>
+            <p class="modal-message" id="modal-message">君は優秀で，入学資格を獲得しました！</p>
             <button class="modal-button" id="modal-button">了解</button>
         </div>
     </div>
@@ -2578,7 +2664,12 @@ z"/>
         // 初始化校友墙
         function initAlumniWall() {
             const wall = document.getElementById('alumniWall');
-            const nameCount = parseInt(document.getElementById('nameCount').value) || 50;
+            let nameCount = parseInt(document.getElementById('nameCount').value) || 30;
+            
+            // 根据屏幕大小调整默认显示数量
+            if (window.innerWidth <= 768) {
+                nameCount = Math.min(nameCount, 20); // 在移动设备上限制最大数量
+            }
             
             // 限制数量在1-100之间
             const actualCount = Math.min(Math.max(1, nameCount), 100);
@@ -2594,7 +2685,7 @@ z"/>
             
             // 使用requestAnimationFrame分批处理以避免界面冻结
             let index = 0;
-            const batchSize = 5;
+            const batchSize = window.innerWidth <= 768 ? 3 : 5; // 在移动设备上减少批次大小
             
             function processBatch() {
                 const batchEnd = Math.min(index + batchSize, selectedNames.length);
@@ -2617,9 +2708,10 @@ z"/>
                     nameEl.textContent = name;
                     
                     // 随机字体大小（固定名字稍大）
+                    const baseFontSize = window.innerWidth <= 768 ? 12 : 14;
                     const fontSize = isFixedName ? 
-                        Math.floor(Math.random() * 6) + 16 : // 16-22px
-                        Math.floor(Math.random() * 10) + 12; // 12-22px
+                        Math.floor(Math.random() * 6) + baseFontSize + 2 : // 在移动设备上调整基础大小
+                        Math.floor(Math.random() * 10) + baseFontSize; 
                     nameEl.style.fontSize = `${fontSize}px`;
                     
                     // 随机旋转角度（固定名字旋转角度小一些）
@@ -2648,7 +2740,9 @@ z"/>
                     // 尝试找到不重叠的位置
                     let placed = false;
                     let attempts = 0;
-                    const maxAttempts = isFixedName ? 300 : 200; // 固定名字尝试更多次
+                    const maxAttempts = isFixedName ? 
+                        (window.innerWidth <= 768 ? 200 : 300) : // 在移动设备上减少尝试次数
+                        (window.innerWidth <= 768 ? 150 : 200);
                     
                     while (!placed && attempts < maxAttempts) {
                         attempts++;
@@ -2680,7 +2774,7 @@ z"/>
                     
                     if (!placed) {
                         // 如果无法找到不重叠的位置，使用网格布局作为后备方案
-                        const gridCols = 10;
+                        const gridCols = window.innerWidth <= 768 ? 8 : 10;
                         const gridRows = Math.ceil(selectedNames.length / gridCols);
                         const cellWidth = wall.offsetWidth / gridCols;
                         const cellHeight = wall.offsetHeight / gridRows;
@@ -2829,6 +2923,15 @@ z"/>
             card.addEventListener('mouseleave', () => {
                 card.style.background = 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)';
             });
+        });
+
+        // 窗口大小改变时重新初始化校友墙
+        window.addEventListener('resize', function() {
+            // 添加防抖处理，避免频繁触发
+            if (this.resizeTimer) clearTimeout(this.resizeTimer);
+            this.resizeTimer = setTimeout(() => {
+                initAlumniWall();
+            }, 250);
         });
     </script>
 </body>
