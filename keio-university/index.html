@@ -81,7 +81,6 @@
             display: flex;
             align-items: center;
         }
-        
         .logo-shield {
             width: 100px;
             height: 90px;
@@ -90,7 +89,6 @@
             justify-content: center;
             align-items: center;
         }
-        
         .logo-text {
             color: #fff;
         }
@@ -250,7 +248,26 @@
             height: 4px;
             background-color: var(--primary-color);
         }
+        /*毕业生*/
+        .section-title2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
         
+        .section-title2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: var(--primary-color);
+        }
         /* 专业介绍 */
         .majors {
             display: grid;
@@ -385,7 +402,7 @@
             height: 120px;
             border-radius: 50%;
             margin: 0 auto 20px;
-            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+            background: linear-gradient(135deg, var(--accent-color) 0%, #5c0da5 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -489,7 +506,7 @@
             transform: translateY(-5px);
         }
         
-        .alumni-avatar {
+       .alumni-avatar {
             width: 120px;
             height: 120px;
             border-radius: 50%;
@@ -499,7 +516,10 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 3rem;
+            font-size: 2.8rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            border: 3px solid var(--secondary-color);
+        
         }
         
         .alumni-name {
@@ -508,6 +528,11 @@
             font-size: 1.4rem;
         }
         
+        .alumni-name0 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
         .alumni-year {
             color: #666;
             margin-bottom: 15px;
@@ -561,7 +586,6 @@
             
             .logo {
                 margin-bottom: 15px;
-                justify-content: center;
             }
             
             .nav-links {
@@ -599,6 +623,221 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* ===== 新增校友墙样式 ===== */
+        .alumni-wall-container {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            min-height: 600px;
+            margin-top: 40px;
+        }
+        
+        .alumni-wall {
+            position: relative;
+            width: 100%;
+            height: 550px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill-opacity="0.03" fill="%23333000" x="0" y="0" width="100" height="100"/></svg>');
+            border-radius: 4px;
+            margin: 0 auto;
+        }
+        
+        .alumni-name {
+            position: absolute;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: default;
+            transition: all 0.3s ease;
+            opacity: 0.85;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        .alumni-name:hover {
+            opacity: 1;
+            transform: scale(1.2) !important;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 固定名字的特殊样式 */
+        .fixed-name {
+            background-color: rgba(212, 175, 55, 0.3) !important; /* 使用校色金色 */
+            border: 2px solid var(--secondary-color);
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .name-1 { color: #8B4513; background-color: rgba(139, 69, 19, 0.1); }
+        .name-2 { color: #A52A2A; background-color: rgba(165, 42, 42, 0.1); }
+        .name-3 { color: #D2691E; background-color: rgba(210, 105, 30, 0.1); }
+        .name-4 { color: #CD853F; background-color: rgba(205, 133, 63, 0.1); }
+        .name-5 { color: #8B0000; background-color: rgba(139, 0, 0, 0.1); }
+        .name-6 { color: #800000; background-color: rgba(128, 0, 0, 0.1); }
+        .name-7 { color: #B22222; background-color: rgba(178, 34, 34, 0.1); }
+        
+        .alumni-controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .shuffle-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .shuffle-btn:hover {
+            background: #7a1f1f;
+            transform: translateY(-2px);
+        }
+        
+        .status-text {
+            margin-top: 10px;
+            color: var(--primary-color);
+            font-size: 14px;
+        }
+        
+        .count-control {
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .count-control input {
+            width: 60px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .fixed-note {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            color: var(--primary-color);
+        }
+
+        /* ===== 新增咨询弹窗样式 ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .simple-modal {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-50px);
+            transition: transform 0.4s ease;
+            position: relative;
+            text-align: center;
+        }
+
+        .modal-overlay.active .simple-modal {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #777;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: var(--primary-color);
+        }
+
+        .modal-icon {
+            font-size: 60px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .modal-message {
+            color: #555;
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .modal-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .modal-button:hover {
+            background-color: #7a1f1f;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 480px) {
+            .simple-modal {
+                padding: 30px 20px;
+                width: 95%;
+            }
+            
+            .modal-title {
+                font-size: 20px;
+            }
+            
+            .modal-message {
+                font-size: 16px;
+            }
+            
+            .modal-icon {
+                font-size: 50px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -613,10 +852,9 @@
         <div class="container header-content">
             <div class="logo">
                 <div class="logo-shield">
-                    
-                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="100%" viewBox="0 0 1024 1024" enable-background="new 0 0 1024 1024" xml:space="preserve">
-<path fill="#ffffff" opacity="1.000000" stroke="none" 
+      <path fill="#ffffff" opacity="1.000000" stroke="none" 
 	d="
 M871.438354,533.282837 
 	C866.773315,565.117981 858.457214,595.522095 846.833984,625.037415 
@@ -1789,7 +2027,7 @@ z"/>
                 </div>
             </div>
             <div class="header-cta">
-                <button class="lang-btn" id="header-button">入学お問い合わせ</button>
+                <button class="lang-btn" id="header-button" onclick="openSimpleModal()">入学お問い合わせ</button>
             </div>
         </div>
     </header>
@@ -1798,18 +2036,20 @@ z"/>
     <nav>
         <div class="container">
             <ul class="nav-links">
-                <li><a href="#" id="nav-home">ホーム</a></li>
-                <li><a href="#" id="nav-about">大学紹介</a></li>
-                <li><a href="#" id="nav-programs">学科・専攻</a></li>
-                <li><a href="#" id="nav-admissions">入学案内</a></li>
-                <li><a href="#" id="nav-campus">キャンパス生活</a></li>
-                <li><a href="#" id="nav-contact">お問い合わせ</a></li>
+                <li><a href="#home" id="nav-home">ホーム</a></li>
+                <li><a href="#about" id="nav-about">大学紹介</a></li>
+                <li><a href="#president" id="nav-president">学長挨拶</a></li>
+                <li><a href="#programs" id="nav-programs">学科・専攻</a></li>
+                <li><a href="#faculty" id="nav-faculty">教員紹介</a></li>
+                <li><a href="#campus" id="nav-campus">キャンパス生活</a></li>
+                <li><a href="#alumni" id="nav-alumni">卒業生</a></li>
+                <li><a href="#news" id="nav-news">ニュース</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- 主横幅 -->
-    <section class="hero">
+    <section class="hero" id="home">
         <div class="hero-content">
             <h2 id="hero-title">慶桜大学で、優雅な学生生活を究める</h2>
             <p id="hero-text">日本初のサボリ技術とモーフィス学に特化した高等教育機関。効率的な学習回避法と創造的な時間活用術を伝授します。</p>
@@ -1817,19 +2057,19 @@ z"/>
     </section>
 
     <!-- 大学介绍 -->
-    <section class="section section-about">
+    <section class="section section-about" id="about">
         <div class="container">
             <h2 class="section-title" id="about-title">大学紹介</h2>
             <div class="news-container glass-effect">
                 <p id="about-text1">慶桜大学は1798年、学生生活の達人である遊学三郎博士によって設立されました。博士は「真の教育とは、如何に効率的に学ばずして単位を取得するかである」という理念のもと、優雅な学生生活を送るための技術を研究する教育機関の必要性を訴え続けました。</p>
                 <p id="about-text2">現在では、サボリ工学部、モーフィス学部、単位取得学部の3学部15学科を有する総合大学へと発展。世界各国から集まった学生たちが、効率的な学習回避法と創造的な時間活用術を修得し、卒業後はさまざまな業界で活躍しています。</p>
-                <p id="about-text3">キャンパス内には日本有数の「居眠り研究室」と「携帯電話いじり施設」を備え、学生は在学中から実践的な技術を磨くことができます。また、提携する世界中のカフェやゲームセンターでのインターンシッププログラムも充実しています。</p>
+                <p id="about-text3">キャampus内には日本有数の「居眠り研究室」と「携帯電話いじり施設」を備え、学生は在学中から実践적인技術を磨くことができます。また、提携する世界中のカフェやゲームセンターでのインターンシッププログラムも充実しています。</p>
             </div>
         </div>
     </section>
 
     <!-- 校长致辞 -->
-    <section class="section section-president">
+    <section class="section section-president" id="president">
         <div class="container">
             <h2 class="section-title" id="president-title">学長挨拶</h2>
             <div class="message-container glass-effect">
@@ -1850,7 +2090,7 @@ z"/>
     </section>
 
     <!-- 专业介绍 -->
-    <section class="section section-programs">
+    <section class="section section-programs" id="programs">
         <div class="container">
             <h2 class="section-title" id="programs-title">人気の専攻</h2>
             <div class="majors">
@@ -1880,7 +2120,7 @@ z"/>
     </section>
 
     <!-- 师资力量 -->
-    <section class="section section-faculty">
+    <section class="section section-faculty" id="faculty">
         <div class="container">
             <h2 class="section-title" id="faculty-title">教員紹介</h2>
             <div class="faculty-container glass-effect">
@@ -1909,7 +2149,7 @@ z"/>
     </section>
 
     <!-- 校园生活 -->
-    <section class="section section-campus">
+    <section class="section section-campus" id="campus">
         <div class="container">
             <h2 class="section-title" id="campus-title">キャンパス生活</h2>
             <div class="campus-container glass-effect">
@@ -1947,32 +2187,51 @@ z"/>
     </section>
 
     <!-- 优秀毕业生 -->
-    <section class="section section-alumni">
+    <section class="section section-alumni" id="alumni">
         <div class="container">
             <h2 class="section-title" id="alumni-title">優秀卒業生</h2>
             <div class="alumni-container glass-effect">
                 <div class="alumni-grid">
                     <div class="alumni-card">
                         <div class="alumni-avatar"><i class="fas fa-user-graduate"></i></div>
-                        <h3 class="alumni-name" id="alumni1-name">Haru</h3>
+                        <h3 class="alumni-name0" id="alumni1-name">Haru</h3>
                         <p class="alumni-year" id="alumni1-year">2012年卒業</p>
                         <p class="alumni-title" id="alumni1-major">モーフィス科学専攻</p>
                         <p class="alumni-quote" id="alumni1-quote">「慶桜大学で学んだ効率的な時間活用術は、現在のコンサルタント業務で大いに役立っています。特に、会議中のスマホ操作テクニックは、クライアントとの打ち合わせでも応用可能です。」</p>
                     </div>
                     <div class="alumni-card">
                         <div class="alumni-avatar"><i class="fas fa-user-graduate"></i></div>
-                        <h3 class="alumni-name" id="alumni2-name">Jackson</h3>
+                        <h3 class="alumni-name0" id="alumni2-name">Jackson</h3>
                         <p class="alumni-year" id="alumni2-year">2009年卒業</p>
                         <p class="alumni-title" id="alumni2-major">エレガントサボリ専攻</p>
                         <p class="alumni-quote" id="alumni2-quote">「大学で習得した創造的な欠席理由作成スキルは、現在のマーケティング職でクリエイティブな企画を考える際の基礎となっています。どんな状況でも突破口を見つける慶桜の精神は、ビジネスの世界でも通用します。」</p>
                     </div>
                 </div>
             </div>
+
+            <!-- 新增校友墙 -->
+     <section class="section section-alumni">
+        <div class="container">
+            <h2 class="section-title2" id="alumni-title2">卒業生</h2>
+            <div class="alumni-wall-container glass-effect">
+                <div class="count-control">
+                    <label for="nameCount" id="alumni-count-label">表示数量:</label>
+                    <input type="number" id="nameCount" min="1" max="100" value="30">
+                </div>
+                <div class="fixed-note" id="fixed-note">※ 金色枠の名前は優秀卒業生です</div>
+                <div class="alumni-wall" id="alumniWall">
+                    <!-- 校友名字将通过JavaScript动态添加 -->
+                </div>
+                <div class="alumni-controls">
+                    <button class="shuffle-btn" id="alumni-shuffle-btn">再配置</button>
+                    <div class="status-text" id="alumni-status-text"></div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- 新闻 -->
-    <section class="section section-news">
+    <section class="section section-news" id="news">
         <div class="container">
             <h2 class="section-title" id="news-title">ニュース</h2>
             <div class="news-container glass-effect">
@@ -2009,7 +2268,7 @@ z"/>
                 <div class="footer-section">
                     <h3 id="links-title">関連リンク</h3>
                     <p><a href="#" style="color: #ffd700;" id="link1">入試情報</a></p>
-                    <p><a href="#" style="color: #ffd700;" id="link2">キャンパスツアー</a></p>
+                    <p><a href="#" style="color: #ffd700;" id="link2">キャampusツアー</a></p>
                     <p><a href="#" style="color: #ffd700;" id="link3">就職・進路情報</a></p>
                 </div>
                 <div class="footer-section">
@@ -2020,23 +2279,60 @@ z"/>
                 </div>
             </div>
             <div class="footer-bottom">
+                 <!-- 添加的域名持有者链接 -->
+            <p id="domain-owner-text" style="margin-bottom: 10px;">
+                <span id="domain-owner-label">ドメイン所有者</span>: 
+                <a href="https://www.monoko.jp" target="_blank" style="color: #ffd700;">Haru</a>
+            </p>
                 <p>&copy; 2025 慶桜大学. All Rights Reserved.</p>
                 <p class="disclaimer" id="disclaimer">このサイトはパロディであり、慶應義塾大学とは一切関係ありません。純粋なエンターテインメント目的で作成されています。</p>
             </div>
         </div>
     </footer>
 
-    <script>
-        // 语言切换功能
-        document.getElementById('lang-zh').addEventListener('click', function() {
-            changeLanguage('zh');
-            document.body.classList.remove('japanese');
-        });
+    <!-- 咨询弹窗 -->
+    <div class="modal-overlay" id="simpleModal">
+        <div class="simple-modal glass-effect">
+            <button class="modal-close" id="closeSimpleModal">&times;</button>
+            <div class="modal-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h2 class="modal-title" id="modal-title">入学資格審査結果</h2>
+            <p class="modal-message" id="modal-message">君は優秀で、入学資格を獲得しました！</p>
+            <button class="modal-button" id="modal-button">了解</button>
+        </div>
+    </div>
 
-        document.getElementById('lang-ja').addEventListener('click', function() {
-            changeLanguage('ja');
-            document.body.classList.add('japanese');
-        });
+    <script>
+        // 当前语言状态
+        let currentLanguage = 'ja';
+        
+        // 校友名字数据
+        const alumniNames = [
+            "山田 太郎", "佐藤 花子", "鈴木 一郎", "高橋 健二", "田中 美咲", "伊藤 誠", "渡辺 翔太",
+            "山本 優子", "中村 大輔", "小林 恵", "加藤 亮", "吉田 さくら", "山口 健太", "松本 遥",
+            "井上 拓也", "木村 めぐみ", "林 勇気", "斎藤 七海", "清水 蓮", "山崎 あかり", "阿部 大輝",
+            "池田 莉子", "橋本 龍馬", "石川 陽菜", "山下 大和", "森 結衣", "中島 海斗", "前田 楓",
+            "小川 ひかり", "岡田 竜也", "長谷川 萌", "村上 颯太", "近藤 優衣", "坂本 律", "遠藤 光",
+            "青木 凜", "藤田 壮太", "西村 詩織", "福田 大夢", "三浦 紗良", "太田 莉緒", "丸山 慶太",
+            "松田 百花", "宮本 大翔", "内田 結愛", "高木 陸", "菅原 玲奈", "野村 碧", "杉山 蒼空",
+            "市川 ひなた", "鎌田 凛太郎", "平野 美月", "横山 陽翔", "田中 眠郎", "佐藤 逃助", "鈴木 写雄",
+            "Haru", "Jackson", "桜井 楽太郎", "遊学 三郎", "中田 英寿", "小野 伸二", "本田 圭佑",
+            "香川 真司", "長友 佑都", "岡崎 慎司", "川口 能活", "中田 翔", "大谷 翔平", "松井 秀喜",
+            "鈴木 一朗", "浅田 真央", "羽生 結弦", "伊調 馨", "吉田 沙保里", "石川 佳純", "福原 愛",
+            "北島 康介", "池江 璃花子", "瀬戸 大也", "髙橋 礼華", "松友 美佐紀", "萩野 公介", "桐生 祥秀",
+            "大橋 悠依", "内村 航平", "白井 健三", "体操 の内村", "野球 の大谷", "水泳 の池江", "卓球 の張本",
+            "羽生 結弦", "紀平 梨花", "鍵山 優真", "宇野 昌磨", "坂本 花織", "宮原 知子", "樋口 新葉"
+        ];
+
+        // 固定名字库 - 这些名字将始终显示
+        const fixedNames = [
+            "Haru",       // 优秀毕业生
+            "Jackson",    // 优秀毕业生
+        ];
+
+        // 存储已放置的元素信息
+        let placedElements = [];
 
         // 文本内容
         const translations = {
@@ -2046,10 +2342,12 @@ z"/>
                 'header-button': '入学咨询',
                 'nav-home': '首页',
                 'nav-about': '大学介绍',
+                'nav-president': '校长致辞',
                 'nav-programs': '学科专业',
-                'nav-admissions': '招生信息',
+                'nav-faculty': '师资力量',
                 'nav-campus': '校园生活',
-                'nav-contact': '联系我们',
+                'nav-alumni': '校友',
+                'nav-news': '新闻',
                 'hero-title': '在庆樱大学，探索优雅的学生生活',
                 'hero-text': '日本首家专注于翘课技术与摸鱼学的高等教育机构。传授高效的学习回避法与创造性的时间活用术。',
                 'about-title': '大学介绍',
@@ -2114,7 +2412,19 @@ z"/>
                 'link2': '校园参观',
                 'link3': '就业方向信息',
                 'social-title': '社交媒体',
-                'disclaimer': '本网站是恶搞 parody 网站，与庆应义塾大学没有任何关系。纯粹以娱乐目的创建。'
+                'disclaimer': '本网站是恶搞 parody 网站，与庆应义塾大学没有任何关系。纯粹以娱乐目的创建。',
+                'domain-owner-label': '本域名持有者',
+                // 校友墙相关文本
+                'alumni-title2': '校友',
+                'alumni-count-label': '显示数量:',
+                'fixed-note': '※ 金色边框的名字为杰出校友',
+                'alumni-shuffle-btn': '重新排列',
+                'alumni-status-text': '配置完成，共放置了 {count} 个名字',
+                'alumni-status-configuring': '配置中...',
+                // 弹窗文本
+                'modal-title': '入学资格审查结果',
+                'modal-message': '你很优秀，已获得入学资格！',
+                'modal-button': '了解'
             },
             'ja': {
                 'header-title': '慶桜大学',
@@ -2122,10 +2432,12 @@ z"/>
                 'header-button': '入学お問い合わせ',
                 'nav-home': 'ホーム',
                 'nav-about': '大学紹介',
+                'nav-president': '学長挨拶',
                 'nav-programs': '学科・専攻',
-                'nav-admissions': '入学案内',
+                'nav-faculty': '教員紹介',
                 'nav-campus': 'キャンパス生活',
-                'nav-contact': 'お問い合わせ',
+                'nav-alumni': '卒業生',
+                'nav-news': 'ニュース',
                 'hero-title': '慶桜大学で、優雅な学生生活を究める',
                 'hero-text': '日本初のサボリ技術とモーフィス学に特化した高等教育機関。効率的な学習回避法と創造的な時間活用術を伝授します。',
                 'about-title': '大学紹介',
@@ -2145,9 +2457,9 @@ z"/>
                 'major1-title': 'エレガントサボリ専攻',
                 'major1-text': '教授に気づかれない完璧な欠席理由の創作技術から、友人による代返システムの構築まで、優雅に授業をサボるための総合的なスキルを学びます。',
                 'major2-title': 'モーフィス科学専攻',
-                'major2-text': '長時間のスマホ操作、SNS巡回、堂々とした居眠りなど、授業中にバレずに時間を浪費する先進的技術を理論と実践の両面から研究します。',
+                'major2-text': '長時間のスマホ操作、SNS巡回、堂々とした居眠りなど、授業中にバレずに時間を浪費する先進性技術を理論と実践の両面から研究します。',
                 'major3-title': '単位取得学専攻',
-                'major3-text': '最小の努力で最大の単位を取得の技術を追求。過去問分析技術、レポートコピペ検出回避法、一夜漬け記憶術など、優雅に卒業するための技能を修得します。',
+                'major3-text': '最小の努力で最大の単位を取得する技術を追求。過去問分析技術、レポートコピペ検出回避法、一夜漬け記憶術など、優雅に卒業するための技能を修得します。',
                 'faculty-title': '教員紹介',
                 'faculty1-name': '田中 眠郎',
                 'faculty1-title': 'モーフィス科学 教授',
@@ -2165,7 +2477,7 @@ z"/>
                 'campus2-desc': '授業中にスマホを最大限に活用する技術を磨く施設。教授の視界死角マップや瞬時に教科書画面に切り替える技術などを学べます。',
                 'campus3-title': 'カフェテリア',
                 'campus3-desc': '単位取得に疲れた学生のための癒し空間。無料のエナジードリンクと、教授の目を欺くための偽装勉強道具のレンタルサービスあり。',
-                'student-text1': '「慶桜大学に入学して、時間の有効活用というものを本当の意味で学びました。教授の視線をかわしながらSNSをチェックする技術や、出席簿に印をつけてもらうための微細なうなずきの技術など、どれも実践的で社会に出てからも役立つものばかりです。」',
+                'student-text1': '「慶桜大学に入学して、時間の有効活用というものを本当の意味で学びました。教授の視線をかわしながらSNSをチェックする技術や、出席簿に印をつけてもらうための微細なうなずきの技術など、どれも実践性で社会に出てからも役立つものばかりです。」',
                 'student-text2': '「特にモーフィス科学実習では、教授がこちらに向いている時にだけ真面目な顔をする『 selective attention technique 』を習得。アルバイト先でもお客様の気を引くのに応用でき、時給アップにつながりました！」',
                 'student-signature': 'エレガントサボリ専攻 3年',
                 'student-name': '桜井 楽太郎',
@@ -2177,7 +2489,7 @@ z"/>
                 'alumni2-name': 'Jackson',
                 'alumni2-year': '2009年卒業',
                 'alumni2-major': 'エレガントサボリ専攻',
-                'alumni2-quote': '「大学で習得した創造的な欠席理由作成スキルは、現在のマーケティング職でクリエイティブな企画を考える際の基礎となっています。どんな状況でも突破口を見つける慶桜の精神は、ビジネスの世界でも通用します。」',
+                'alumni2-quote': '「大学で習得した創造的な欠席理由作成スキルは、現在のマーケティング職でクリエイティブな企画を考える際の基礎となっています。どんな状況でも突破口見つける慶桜の精神は、ビジネスの世界でも通用します。」',
                 'news-title': 'ニュース',
                 'news1': 'モーフィス科学研究科の田中教授が「第10回国際サボリ大会」で最優秀奖を受賞',
                 'news2': 'サボリ工学部とLINEが共同研究施設「ながらスマホラボ」を開設',
@@ -2190,24 +2502,334 @@ z"/>
                 'link2': 'キャンパスツアー',
                 'link3': '就職・進路情報',
                 'social-title': 'ソーシャルメディア',
-                'disclaimer': 'このサイトはパロディであり、慶應義塾大学とは一切関係ありません。純粋なエンターテインメント目的で作成されています。'
+                'disclaimer': 'このサイトはパロディであり、慶應義塾大学とは一切関係ありません。純粋なエンターテインメント目的で作成されています。',
+                'domain-owner-label': 'ドメイン所有者',
+                // 校友墙相关文本
+                'alumni-title2': '卒業生',
+                'alumni-count-label': '表示数量:',
+                'fixed-note': '※ 金色枠の名前は優秀卒業生です',
+                'alumni-shuffle-btn': '再配置',
+                'alumni-status-text': '配置完成，共に {count} 個の名前を配置しました',
+                'alumni-status-configuring': '配置中...',
+                // 弹窗文本
+                'modal-title': '入学資格審査結果',
+                'modal-message': '君は優秀で、入学資格を獲得しました！',
+                'modal-button': '了解'
             }
         };
 
+        // 检测两个矩形是否重叠
+        function isOverlapping(rect1, rect2) {
+            return !(
+                rect1.right < rect2.left ||
+                rect1.left > rect2.right ||
+                rect1.bottom < rect2.top ||
+                rect1.top > rect2.bottom
+            );
+        }
+
+        // 检查新元素是否与任何已放置元素重叠
+        function checkOverlap(newRect) {
+            for (const existingRect of placedElements) {
+                if (isOverlapping(newRect, existingRect)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // 从数组中随机选择指定数量的元素
+        function getRandomNames(count) {
+            // 首先确保固定名字被包含
+            const selectedNames = [...fixedNames];
+            
+            // 从总名字库中排除固定名字
+            const availableNames = alumniNames.filter(name => !fixedNames.includes(name));
+            
+            // 随机排序可用名字
+            const shuffled = [...availableNames].sort(() => 0.5 - Math.random());
+            
+            // 计算还需要多少随机名字
+            const remainingCount = count - fixedNames.length;
+            
+            // 如果固定名字已经超过请求数量，只返回固定名字
+            if (remainingCount <= 0) {
+                return selectedNames.slice(0, count);
+            }
+            
+            // 添加随机名字
+            selectedNames.push(...shuffled.slice(0, remainingCount));
+            
+            return selectedNames;
+        }
+
+        // 更新状态文本
+        function updateStatusText(count) {
+            const statusText = document.getElementById('alumni-status-text');
+            if (statusText) {
+                if (count === undefined) {
+                    statusText.textContent = translations[currentLanguage]['alumni-status-configuring'];
+                } else {
+                    statusText.textContent = translations[currentLanguage]['alumni-status-text'].replace('{count}', count);
+                }
+            }
+        }
+
+        // 初始化校友墙
+        function initAlumniWall() {
+            const wall = document.getElementById('alumniWall');
+            const nameCount = parseInt(document.getElementById('nameCount').value) || 50;
+            
+            // 限制数量在1-100之间
+            const actualCount = Math.min(Math.max(1, nameCount), 100);
+            document.getElementById('nameCount').value = actualCount;
+            
+            wall.innerHTML = '';
+            placedElements = [];
+            
+            updateStatusText();
+            
+            // 获取名字（固定名字 + 随机名字）
+            const selectedNames = getRandomNames(actualCount);
+            
+            // 使用requestAnimationFrame分批处理以避免界面冻结
+            let index = 0;
+            const batchSize = 5;
+            
+            function processBatch() {
+                const batchEnd = Math.min(index + batchSize, selectedNames.length);
+                
+                for (; index < batchEnd; index++) {
+                    const name = selectedNames[index];
+                    const nameEl = document.createElement('div');
+                    nameEl.className = 'alumni-name';
+                    
+                    // 检查是否是固定名字
+                    const isFixedName = fixedNames.includes(name);
+                    if (isFixedName) {
+                        nameEl.classList.add('fixed-name');
+                    } else {
+                        // 随机选择样式类
+                        const styleClass = 'name-' + Math.floor(Math.random() * 7 + 1);
+                        nameEl.classList.add(styleClass);
+                    }
+                    
+                    nameEl.textContent = name;
+                    
+                    // 随机字体大小（固定名字稍大）
+                    const fontSize = isFixedName ? 
+                        Math.floor(Math.random() * 6) + 16 : // 16-22px
+                        Math.floor(Math.random() * 10) + 12; // 12-22px
+                    nameEl.style.fontSize = `${fontSize}px`;
+                    
+                    // 随机旋转角度（固定名字旋转角度小一些）
+                    const rotation = isFixedName ? 
+                        Math.floor(Math.random() * 11) - 5 : // -5到5度
+                        Math.floor(Math.random() * 41) - 20; // -20到20度
+                    
+                    // 随机透明度（固定名字更不透明）
+                    const opacity = isFixedName ? 
+                        0.9 + Math.random() * 0.1 : // 0.9-1.0
+                        0.7 + Math.random() * 0.3;  // 0.7-1.0
+                    nameEl.style.opacity = opacity;
+                    
+                    // 随机z-index（固定名字在更高层）
+                    nameEl.style.zIndex = isFixedName ? 
+                        Math.floor(Math.random() * 5) + 10 : // 10-15
+                        Math.floor(Math.random() * 10) + 1;  // 1-10
+                    
+                    wall.appendChild(nameEl);
+                    
+                    // 获取元素的实际尺寸
+                    const rect = nameEl.getBoundingClientRect();
+                    const elementWidth = rect.width;
+                    const elementHeight = rect.height;
+                    
+                    // 尝试找到不重叠的位置
+                    let placed = false;
+                    let attempts = 0;
+                    const maxAttempts = isFixedName ? 300 : 200; // 固定名字尝试更多次
+                    
+                    while (!placed && attempts < maxAttempts) {
+                        attempts++;
+                        
+                        // 随机位置（考虑元素尺寸）
+                        const posX = Math.random() * (wall.offsetWidth - elementWidth - 20);
+                        const posY = Math.random() * (wall.offsetHeight - elementHeight - 20);
+                        
+                        // 创建新元素的矩形区域
+                        const newRect = {
+                            left: posX,
+                            top: posY,
+                            right: posX + elementWidth + (isFixedName ? 20 : 15), // 固定名字更多边距
+                            bottom: posY + elementHeight + (isFixedName ? 15 : 10) // 固定名字更多边距
+                        };
+                        
+                        // 检查是否重叠
+                        if (!checkOverlap(newRect)) {
+                            // 不重叠，放置元素
+                            nameEl.style.left = `${posX}px`;
+                            nameEl.style.top = `${posY}px`;
+                            nameEl.style.transform = `rotate(${rotation}deg)`;
+                            
+                            // 添加到已放置元素列表
+                            placedElements.push(newRect);
+                            placed = true;
+                        }
+                    }
+                    
+                    if (!placed) {
+                        // 如果无法找到不重叠的位置，使用网格布局作为后备方案
+                        const gridCols = 10;
+                        const gridRows = Math.ceil(selectedNames.length / gridCols);
+                        const cellWidth = wall.offsetWidth / gridCols;
+                        const cellHeight = wall.offsetHeight / gridRows;
+                        
+                        const col = index % gridCols;
+                        const row = Math.floor(index / gridCols);
+                        
+                        const posX = col * cellWidth + (cellWidth - elementWidth) / 2;
+                        const posY = row * cellHeight + (cellHeight - elementHeight) / 2;
+                        
+                        nameEl.style.left = `${Math.max(0, posX)}px`;
+                        nameEl.style.top = `${Math.max(0, posY)}px`;
+                        nameEl.style.transform = `rotate(${rotation}deg)`;
+                    }
+                }
+                
+                if (index < selectedNames.length) {
+                    requestAnimationFrame(processBatch);
+                } else {
+                    updateStatusText(selectedNames.length);
+                }
+            }
+            
+            processBatch();
+        }
+
+        // 语言切换功能
         function changeLanguage(lang) {
+            currentLanguage = lang;
+            
+            // 更新所有文本内容
             document.querySelectorAll('[id]').forEach(element => {
                 const id = element.id;
                 if (translations[lang] && translations[lang][id]) {
                     element.textContent = translations[lang][id];
                 }
             });
+            
+            // 更新状态文本
+            const statusText = document.getElementById('alumni-status-text');
+            if (statusText && statusText.textContent.includes('配置')) {
+                const countMatch = statusText.textContent.match(/\d+/);
+                if (countMatch) {
+                    updateStatusText(parseInt(countMatch[0]));
+                }
+            }
+            
+            // 更新body类以应用正确的字体
+            if (lang === 'ja') {
+                document.body.classList.add('japanese');
+            } else {
+                document.body.classList.remove('japanese');
+            }
+            
+            // 更新弹窗语言
+            updateSimpleModalLanguage(lang);
         }
 
-        // 默认加载日文
+        // 简洁弹窗功能
+        const simpleModal = document.getElementById('simpleModal');
+        const closeSimpleModalBtn = document.getElementById('closeSimpleModal');
+        const modalButton = document.getElementById('modal-button');
+
+        // 打开弹窗
+        function openSimpleModal() {
+            simpleModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // 防止背景滚动
+        }
+
+        // 关闭弹窗
+        function closeSimpleModal() {
+            simpleModal.classList.remove('active');
+            document.body.style.overflow = ''; // 恢复背景滚动
+        }
+
+        // 点击弹窗外部关闭
+        simpleModal.addEventListener('click', (e) => {
+            if (e.target === simpleModal) {
+                closeSimpleModal();
+            }
+        });
+
+        // ESC键关闭
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && simpleModal.classList.contains('active')) {
+                closeSimpleModal();
+            }
+        });
+
+        // 为弹窗添加双语支持
+        function updateSimpleModalLanguage(lang) {
+            document.getElementById('modal-title').textContent = translations[lang]['modal-title'];
+            document.getElementById('modal-message').textContent = translations[lang]['modal-message'];
+            document.getElementById('modal-button').textContent = translations[lang]['modal-button'];
+        }
+
+        // 页面加载时初始化
         window.onload = function() {
+            // 设置默认语言
             changeLanguage('ja');
-            document.body.classList.add('japanese');
+            
+            // 初始化校友墙
+            initAlumniWall();
+            
+            // 添加重新排列按钮事件
+            document.getElementById('alumni-shuffle-btn').addEventListener('click', initAlumniWall);
+            
+            // 添加数量输入框事件
+            document.getElementById('nameCount').addEventListener('change', initAlumniWall);
+            
+            // 添加语言切换事件
+            document.getElementById('lang-zh').addEventListener('click', function() {
+                changeLanguage('zh');
+            });
+            
+            document.getElementById('lang-ja').addEventListener('click', function() {
+                changeLanguage('ja');
+            });
+            
+            // 添加弹窗关闭按钮事件
+            closeSimpleModalBtn.addEventListener('click', closeSimpleModal);
+            modalButton.addEventListener('click', closeSimpleModal);
+            
+            // 添加导航链接点击事件
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
         };
+        
+        // 添加卡片悬停效果
+        document.querySelectorAll('.alumni-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.background = 'linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.background = 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)';
+            });
+        });
     </script>
 </body>
 </html>
