@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>慶桜大学 - エレガントなサボリとモーフィスの最高学府</title>
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -578,7 +578,7 @@
             margin-top: 10px;
         }
         
-        /* ===== 新增校友墙样式 ===== */
+        /* ===== 修改校友墙样式 ===== */
         .alumni-wall-container {
             background: white;
             border-radius: 8px;
@@ -597,23 +597,39 @@
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill-opacity="0.03" fill="%23333000" x="0" y="0" width="100" height="100"/></svg>');
             border-radius: 4px;
             margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            grid-auto-rows: minmax(40px, auto);
+            gap: 10px;
+            padding: 15px;
+            overflow-y: auto;
         }
         
         .alumni-name {
-            position: absolute;
-            padding: 5px 10px;
-            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 12px;
+            border-radius: 4px;
             cursor: default;
             transition: all 0.3s ease;
             opacity: 0.85;
             font-weight: 500;
+            text-align: center;
+            margin: 0;
+            position: static;
+            transform: none !important;
+            font-size: 14px;
+            height: 100%;
             white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .alumni-name:hover {
             opacity: 1;
-            transform: scale(1.2) !important;
-            z-index: 100;
+            transform: scale(1.05) !important;
+            z-index: 10;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
@@ -623,6 +639,8 @@
             border: 2px solid var(--secondary-color);
             font-weight: bold;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            /* grid-column: span 2; */
+            /* grid-row: span 1; */
         }
         
         .name-1 { color: #8B4513; background-color: rgba(139, 69, 19, 0.1); }
@@ -828,6 +846,10 @@
             
             .alumni-wall {
                 height: 400px; /* 降低高度适应小屏幕 */
+                grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+                grid-auto-rows: minmax(35px, auto);
+                gap: 8px;
+                padding: 10px;
             }
             
             /* 控制元素垂直排列 */
@@ -840,12 +862,13 @@
             /* 名字元素大小调整 */
             .alumni-name {
                 font-size: 12px !important;
-                padding: 4px 8px;
-                border-radius: 2px;
+                padding: 5px 8px;
+                border-radius: 3px;
             }
             
             .fixed-name {
-                font-size: 14px !important;
+                font-size: 12px !important;
+                grid-column: span 1;
             }
             
             /* 状态文本调整 */
@@ -884,15 +907,19 @@
         @media (max-width: 480px) {
             .alumni-wall {
                 height: 350px;
+                grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+                grid-auto-rows: minmax(30px, auto);
+                gap: 6px;
             }
             
             .alumni-name {
                 font-size: 11px !important;
-                padding: 3px 6px;
+                padding: 4px 6px;
             }
             
             .fixed-name {
-                font-size: 12px !important;
+                font-size: 11px !important;
+                grid-column: span 1;
             }
             
             .shuffle-btn {
@@ -910,6 +937,7 @@
         @media (min-width: 769px) and (max-width: 1024px) {
             .alumni-wall {
                 height: 500px;
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             }
         }
         
@@ -917,7 +945,8 @@
         @media (hover: none) and (pointer: coarse) {
             .alumni-name {
                 min-width: 60px;
-                min-height: 24px;
+                min-height: 30px;
+                padding: 8px;
             }
             
             .shuffle-btn,
@@ -2105,7 +2134,7 @@ M337.779846,202.338654
 	C322.175507,158.849289 326.879608,159.550964 329.650696,163.498978 
 	C337.761749,175.054916 341.448242,187.815292 337.779846,202.338654 
 z"/>
-</svg>                      
+</svg>
                 </div>
                 <div class="logo-text">
                     <h1 id="header-title">慶桜大学</h1>
@@ -2122,7 +2151,7 @@ z"/>
     <nav>
         <div class="container">
             <ul class="nav-links">
-                <li><a href="#home" id="nav-home">ホーム</a></li>
+                <li><a href="#" id="nav-home">ホーム</a></li>
                 <li><a href="#about" id="nav-about">大学紹介</a></li>
                 <li><a href="#president" id="nav-president">学長挨拶</a></li>
                 <li><a href="#programs" id="nav-programs">学科・専攻</a></li>
@@ -2302,7 +2331,7 @@ z"/>
             <div class="alumni-wall-container glass-effect">
                 <div class="count-control">
                     <label for="nameCount" id="alumni-count-label">表示数量:</label>
-                    <input type="number" id="nameCount" min="1" max="100" value="30">
+                    <input type="number" id="nameCount" min="1" max="100" value="35">
                 </div>
                 <div class="fixed-note" id="fixed-note">※ 金色枠の名前は優秀卒業生です</div>
                 <div class="alumni-wall" id="alumniWall">
@@ -2427,9 +2456,6 @@ z"/>
             "Haru",       // 优秀毕业生
             "Jackson",    // 优秀毕业生
         ];
-
-        // 存储已放置的元素信息
-        let placedElements = [];
 
         // 文本内容
         const translations = {
@@ -2615,50 +2641,30 @@ z"/>
             }
         };
 
-        // 检测两个矩形是否重叠
-        function isOverlapping(rect1, rect2) {
-            return !(
-                rect1.right < rect2.left ||
-                rect1.left > rect2.right ||
-                rect1.bottom < rect2.top ||
-                rect1.top > rect2.bottom
-            );
-        }
-
-        // 检查新元素是否与任何已放置元素重叠
-        function checkOverlap(newRect) {
-            for (const existingRect of placedElements) {
-                if (isOverlapping(newRect, existingRect)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         // 从数组中随机选择指定数量的元素
         function getRandomNames(count) {
-            // 首先确保固定名字被包含
-            const selectedNames = [...fixedNames];
-            
-            // 从总名字库中排除固定名字
-            const availableNames = alumniNames.filter(name => !fixedNames.includes(name));
-            
-            // 随机排序可用名字
-            const shuffled = [...availableNames].sort(() => 0.5 - Math.random());
-            
-            // 计算还需要多少随机名字
-            const remainingCount = count - fixedNames.length;
-            
-            // 如果固定名字已经超过请求数量，只返回固定名字
-            if (remainingCount <= 0) {
-                return selectedNames.slice(0, count);
-            }
-            
-            // 添加随机名字
-            selectedNames.push(...shuffled.slice(0, remainingCount));
-            
-            return selectedNames;
-        }
+    // 首先确保固定名字被包含
+    const selectedNames = [...fixedNames];
+    
+    // 从总名字库中排除固定名字
+    const availableNames = alumniNames.filter(name => !fixedNames.includes(name));
+    
+    // 随机排序可用名字
+    const shuffled = [...availableNames].sort(() => 0.5 - Math.random());
+    
+    // 计算还需要多少随机名字
+    const remainingCount = count - fixedNames.length;
+    
+    // 如果请求的数量小于固定名字数量，只返回部分固定名字
+    if (remainingCount <= 0) {
+        return fixedNames.slice(0, count);
+    }
+    
+    // 添加随机名字
+    selectedNames.push(...shuffled.slice(0, remainingCount));
+    
+    return selectedNames;
+}
 
         // 更新状态文本
         function updateStatusText(count) {
@@ -2672,145 +2678,64 @@ z"/>
             }
         }
 
-        // 初始化校友墙
-        function initAlumniWall() {
-            const wall = document.getElementById('alumniWall');
-            let nameCount = parseInt(document.getElementById('nameCount').value) || 30;
-            
-            // 根据屏幕大小调整默认显示数量
-            if (window.innerWidth <= 768) {
-                nameCount = Math.min(nameCount, 20); // 在移动设备上限制最大数量
-            }
-            
-            // 限制数量在1-100之间
-            const actualCount = Math.min(Math.max(1, nameCount), 100);
-            document.getElementById('nameCount').value = actualCount;
-            
-            wall.innerHTML = '';
-            placedElements = [];
-            
-            updateStatusText();
-            
-            // 获取名字（固定名字 + 随机名字）
-            const selectedNames = getRandomNames(actualCount);
-            
-            // 使用requestAnimationFrame分批处理以避免界面冻结
-            let index = 0;
-            const batchSize = window.innerWidth <= 768 ? 3 : 5; // 在移动设备上减少批次大小
-            
-            function processBatch() {
-                const batchEnd = Math.min(index + batchSize, selectedNames.length);
-                
-                for (; index < batchEnd; index++) {
-                    const name = selectedNames[index];
-                    const nameEl = document.createElement('div');
-                    nameEl.className = 'alumni-name';
-                    
-                    // 检查是否是固定名字
-                    const isFixedName = fixedNames.includes(name);
-                    if (isFixedName) {
-                        nameEl.classList.add('fixed-name');
-                    } else {
-                        // 随机选择样式类
-                        const styleClass = 'name-' + Math.floor(Math.random() * 7 + 1);
-                        nameEl.classList.add(styleClass);
-                    }
-                    
-                    nameEl.textContent = name;
-                    
-                    // 随机字体大小（固定名字稍大）
-                    const baseFontSize = window.innerWidth <= 768 ? 12 : 14;
-                    const fontSize = isFixedName ? 
-                        Math.floor(Math.random() * 6) + baseFontSize + 2 : // 在移动设备上调整基础大小
-                        Math.floor(Math.random() * 10) + baseFontSize; 
-                    nameEl.style.fontSize = `${fontSize}px`;
-                    
-                    // 随机旋转角度（固定名字旋转角度小一些）
-                    const rotation = isFixedName ? 
-                        Math.floor(Math.random() * 11) - 5 : // -5到5度
-                        Math.floor(Math.random() * 41) - 20; // -20到20度
-                    
-                    // 随机透明度（固定名字更不透明）
-                    const opacity = isFixedName ? 
-                        0.9 + Math.random() * 0.1 : // 0.9-1.0
-                        0.7 + Math.random() * 0.3;  // 0.7-1.0
-                    nameEl.style.opacity = opacity;
-                    
-                    // 随机z-index（固定名字在更高层）
-                    nameEl.style.zIndex = isFixedName ? 
-                        Math.floor(Math.random() * 5) + 10 : // 10-15
-                        Math.floor(Math.random() * 10) + 1;  // 1-10
-                    
-                    wall.appendChild(nameEl);
-                    
-                    // 获取元素的实际尺寸
-                    const rect = nameEl.getBoundingClientRect();
-                    const elementWidth = rect.width;
-                    const elementHeight = rect.height;
-                    
-                    // 尝试找到不重叠的位置
-                    let placed = false;
-                    let attempts = 0;
-                    const maxAttempts = isFixedName ? 
-                        (window.innerWidth <= 768 ? 200 : 300) : // 在移动设备上减少尝试次数
-                        (window.innerWidth <= 768 ? 150 : 200);
-                    
-                    while (!placed && attempts < maxAttempts) {
-                        attempts++;
-                        
-                        // 随机位置（考虑元素尺寸）
-                        const posX = Math.random() * (wall.offsetWidth - elementWidth - 20);
-                        const posY = Math.random() * (wall.offsetHeight - elementHeight - 20);
-                        
-                        // 创建新元素的矩形区域
-                        const newRect = {
-                            left: posX,
-                            top: posY,
-                            right: posX + elementWidth + (isFixedName ? 20 : 15), // 固定名字更多边距
-                            bottom: posY + elementHeight + (isFixedName ? 15 : 10) // 固定名字更多边距
-                        };
-                        
-                        // 检查是否重叠
-                        if (!checkOverlap(newRect)) {
-                            // 不重叠，放置元素
-                            nameEl.style.left = `${posX}px`;
-                            nameEl.style.top = `${posY}px`;
-                            nameEl.style.transform = `rotate(${rotation}deg)`;
-                            
-                            // 添加到已放置元素列表
-                            placedElements.push(newRect);
-                            placed = true;
-                        }
-                    }
-                    
-                    if (!placed) {
-                        // 如果无法找到不重叠的位置，使用网格布局作为后备方案
-                        const gridCols = window.innerWidth <= 768 ? 8 : 10;
-                        const gridRows = Math.ceil(selectedNames.length / gridCols);
-                        const cellWidth = wall.offsetWidth / gridCols;
-                        const cellHeight = wall.offsetHeight / gridRows;
-                        
-                        const col = index % gridCols;
-                        const row = Math.floor(index / gridCols);
-                        
-                        const posX = col * cellWidth + (cellWidth - elementWidth) / 2;
-                        const posY = row * cellHeight + (cellHeight - elementHeight) / 2;
-                        
-                        nameEl.style.left = `${Math.max(0, posX)}px`;
-                        nameEl.style.top = `${Math.max(0, posY)}px`;
-                        nameEl.style.transform = `rotate(${rotation}deg)`;
-                    }
-                }
-                
-                if (index < selectedNames.length) {
-                    requestAnimationFrame(processBatch);
-                } else {
-                    updateStatusText(selectedNames.length);
-                }
-            }
-            
-            processBatch();
+        // 初始化校友墙 - 使用网格布局
+      function initAlumniWall() {
+    const wall = document.getElementById('alumniWall');
+    let nameCount = parseInt(document.getElementById('nameCount').value) || 30;
+    
+    // 根据屏幕大小调整默认显示数量
+    if (window.innerWidth <= 768) {
+        nameCount = Math.min(nameCount, 20); // 在移动设备上限制最大数量
+    }
+    
+    // 限制数量在1-100之间
+    const actualCount = Math.min(Math.max(1, nameCount), 100);
+    document.getElementById('nameCount').value = actualCount;
+    
+    wall.innerHTML = '';
+    
+    updateStatusText();
+    
+    // 获取名字（固定名字 + 随机名字）
+    const selectedNames = getRandomNames(actualCount);
+    
+    // 打乱所有名字的顺序，包括固定名字
+    const shuffledNames = selectedNames.sort(() => Math.random() - 0.5);
+    
+    // 添加名字元素到网格
+    shuffledNames.forEach(name => {
+        const nameEl = document.createElement('div');
+        nameEl.className = 'alumni-name'; // 使用统一的alumni-name类确保大小一致
+        
+        // 检查是否是固定名字
+        const isFixedName = fixedNames.includes(name);
+        if (isFixedName) {
+            // 只添加fixed-name类，不改变基础样式
+            nameEl.classList.add('fixed-name');
+        } else {
+            // 随机选择样式类
+            const styleClass = 'name-' + Math.floor(Math.random() * 7 + 1);
+            nameEl.classList.add(styleClass);
         }
+        
+        nameEl.textContent = name;
+        
+        // 对所有名字使用相同的旋转范围，包括固定名字
+        const rotation = Math.floor(Math.random() * 41) - 20; // -20到20度
+        nameEl.style.transform = `rotate(${rotation}deg)`;
+        
+        // 对所有名字使用相同的透明度范围
+        const opacity = 0.7 + Math.random() * 0.3; // 0.7-1.0
+        nameEl.style.opacity = opacity;
+        
+        // 对所有名字使用相同的z-index范围
+        nameEl.style.zIndex = Math.floor(Math.random() * 10) + 1; // 1-10
+        
+        wall.appendChild(nameEl);
+    });
+    
+    updateStatusText(selectedNames.length);
+}
 
         // 语言切换功能
         function changeLanguage(lang) {
@@ -2914,6 +2839,16 @@ z"/>
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const targetId = this.getAttribute('href');
+                    // 如果是Home链接，直接滚动到顶部
+        if (targetId === '#') {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            return;
+        }
+
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
                         window.scrollTo({
@@ -2923,10 +2858,8 @@ z"/>
                     }
                 });
             });
-        // 记录初始窗口宽度
-            lastWindowWidth = window.innerWidth;
         };
-        
+
         // 添加卡片悬停效果
         document.querySelectorAll('.alumni-card').forEach(card => {
             card.addEventListener('mouseenter', () => {
@@ -2936,19 +2869,6 @@ z"/>
             card.addEventListener('mouseleave', () => {
                 card.style.background = 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)';
             });
-        });
-
-        // 窗口大小改变时重新初始化校友墙
-        window.addEventListener('resize', function() {
-			// 只在宽度变化超过50px时才重新初始化
-            const currentWidth = window.innerWidth;
-            if (Math.abs(currentWidth - lastWindowWidth) > 50) 
-                lastWindowWidth = currentWidth;
-            // 添加防抖处理，避免频繁触发
-            if (this.resizeTimer) clearTimeout(this.resizeTimer);
-            this.resizeTimer = setTimeout(() => {
-                initAlumniWall();
-            }, 250);
         });
     </script>
 </body>
