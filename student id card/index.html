@@ -1628,74 +1628,141 @@ dGFtcAAyMDI1LTA4LTI3VDE0OjEyOjE2KzAwOjAwdo7M3wAAAABJRU5ErkJggg==" />
         });
         
         function downloadCard() {
-            // 显示加载指示器
-            const loading = document.getElementById('loading');
-            loading.style.display = 'flex';
-            
-            // 使用requestAnimationFrame确保UI更新
-            requestAnimationFrame(() => {
-                // 克隆学生证元素
-                const cardElement = document.getElementById('studentCard');
-                const clone = cardElement.cloneNode(true);
+    // 显示加载指示器
+    const loading = document.getElementById('loading');
+    loading.style.display = 'flex';
+    
+    // 使用setTimeout确保UI更新完成
+    setTimeout(() => {
+        // 克隆学生证元素
+        const cardElement = document.getElementById('studentCard');
+        const clone = cardElement.cloneNode(true);
+        
+        // 处理SVG图片 - 确保它们能正确渲染
+        processSVGElements(clone);
+        
+        // 移除可能干扰的元素
+        clone.style.boxShadow = 'none';
+        clone.style.transform = 'translateZ(0)';
+        
+        // 添加到文档中进行渲染
+        clone.style.position = 'absolute';
+        clone.style.left = '-9999px';
+        document.body.appendChild(clone);
+        
+        // 等待所有资源加载完成
+        waitForResources(clone).then(() => {
+            // 使用html2canvas进行渲染
+            html2canvas(clone, {
+                scale: 2, // iOS上降低分辨率可能更可靠
+                logging: false,
+                useCORS: true,
+                backgroundColor: null,
+                allowTaint: false, // 改为false，确保安全性
+                onclone: function(clonedDocument, clonedElement) {
+                    // 确保所有样式正确应用
+                    clonedElement.style.boxShadow = 'none';
+                },
+                // 添加iOS特定配置
+                async: true,
+                foreignObjectRendering: false,
+                imageTimeout: 30000, // 增加超时时间
+                ignoreElements: (element) => {
+                    // 忽略可能引起问题的元素
+                    return element.tagName === 'IFRAME';
+                }
+            }).then(canvas => {
+                // 从文档中移除克隆元素
+                document.body.removeChild(clone);
                 
-                // 移除可能干扰的元素
-                clone.style.boxShadow = 'none';
-                clone.style.transform = 'translateZ(0)'; // 触发GPU加速
-                
-                // 添加到文档中进行渲染
-                clone.style.position = 'absolute';
-                clone.style.left = '-9999px';
-                document.body.appendChild(clone);
-                
-                // 使用html2canvas进行渲染
-                html2canvas(clone, {
-                    scale: 3, // 提高分辨率
-                    logging: false,
-                    useCORS: true,
-                    backgroundColor: null,
-                    allowTaint: true,
-                    onclone: function(document, element) {
-                        // 确保所有样式正确应用
-                        element.style.boxShadow = 'none';
-                    }
-                
-                    // 添加以下配置以提高iOS兼容性
-            async: true,
-            foreignObjectRendering: false,
-            imageTimeout: 15000 // 增加图片加载超时时间
-        }).then(canvas => {
-                    // 从文档中移除克隆元素
-                    document.body.removeChild(clone);
-                    
-                    // 检测是否为iOS设备
-                    if (isIOS()) {
-                        // iOS设备显示保存提示
+                // 检测是否为iOS设备
+                if (isIOS()) {
+                    // iOS设备显示保存提示
+                    try {
                         const dataURL = canvas.toDataURL('image/png');
                         document.getElementById('iosGeneratedImage').src = dataURL;
                         document.getElementById('iosSaveHint').style.display = 'flex';
-                        loading.style.display = 'none';
-                    } else {
-                        // 非iOS设备正常下载
+                    } catch (e) {
+                        console.error("iOS图片生成错误:", e);
+                        alert("iOSで画像を生成できませんでした。もう一度お試しください。");
+                    }
+                } else {
+                    // 非iOS设备正常下载
+                    try {
                         const link = document.createElement('a');
                         link.download = '慶桜大学学生証.png';
                         link.href = canvas.toDataURL('image/png');
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);
-                        
-                        // 隐藏加载指示器
-                        loading.style.display = 'none';
+                    } catch (e) {
+                        console.error("图片下载错误:", e);
+                        alert("画像のダウンロード中にエラーが発生しました。");
                     }
-                }).catch(error => {
-                    console.error('Error generating image:', error);
-                    alert('画像の生成中にエラーが発生しました。もう一度お試しください。');
-                    loading.style.display = 'none';
-                    if (document.body.contains(clone)) {
-                        document.body.removeChild(clone);
-                    }
-                });
+                }
+                
+                // 隐藏加载指示器
+                loading.style.display = 'none';
+            }).catch(error => {
+                console.error('Error generating image:', error);
+                // 从文档中移除克隆元素
+                if (document.body.contains(clone)) {
+                    document.body.removeChild(clone);
+                }
+                alert('画像の生成中にエラーが発生しました。もう一度お試しください。');
+                loading.style.display = 'none';
             });
+        });
+    }, 100);
+}
+
+// 处理SVG元素以确保正确渲染
+function processSVGElements(element) {
+    const svgs = element.querySelectorAll('svg');
+    svgs.forEach(svg => {
+        // 确保SVG有明确的尺寸
+        if (!svg.getAttribute('width') || !svg.getAttribute('height')) {
+            svg.setAttribute('width', '100%');
+            svg.setAttribute('height', '100%');
         }
+        
+        // 确保SVG有明确的视图框
+        if (!svg.getAttribute('viewBox')) {
+            const width = svg.getAttribute('width') || '100';
+            const height = svg.getAttribute('height') || '100';
+            svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+        }
+    });
+}
+
+// 等待所有资源加载完成
+function waitForResources(element) {
+    return new Promise((resolve) => {
+        const images = element.querySelectorAll('img');
+        let loadedCount = 0;
+        
+        if (images.length === 0) {
+            resolve();
+            return;
+        }
+        
+        const checkAllLoaded = () => {
+            loadedCount++;
+            if (loadedCount >= images.length) {
+                resolve();
+            }
+        };
+        
+        images.forEach(img => {
+            if (img.complete) {
+                checkAllLoaded();
+            } else {
+                img.addEventListener('load', checkAllLoaded);
+                img.addEventListener('error', checkAllLoaded); // 即使出错也继续
+            }
+        });
+    });
+}
         
         // 初始化
         window.addEventListener('load', function() {
