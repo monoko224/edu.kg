@@ -176,24 +176,7 @@
             max-width: 350px;
         }
         
-        /* 学生証样式 - 与原文件保持一致 */
-        .student-id::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 400px;
-            height: 400px;
-            background-image: url("data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8ks1Q1lJST0iIC8+Cjwvc3ZnPgo=");
-            background-repeat: no-repeat;
-            background-position: center;
-            opacity: 0.12;
-            z-index: 0;
-            pointer-events: none;
-            margin-top: 25px;
-        }
-
+        /* 学生証样式 - 修复iOS显示问题 */
         .student-id {
             width: 350px;
             height: 220px;
@@ -204,8 +187,28 @@
             position: relative;
             overflow: hidden;
             border: 1px solid #d0d0d0;
+            /* 修复iOS flex布局问题 */
+            display: flex;
+            flex-direction: column;
         }
         
+        .student-id::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background-image: url("data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCIFlYUmxBREl3TWpVdE1EZ3RNamRVCk1EVTZNamc2TlRjck1EQTZNREM4b3A3SkFBQUFKWFJGV0hSa1lYUmxPbTF2WkdsbWVRQXlNREkxTFRBNExUSTNWREExT2pJNE9qVTMKS3pBd09qQXd6ZjhtZFFBQUFDaDBSVmgwWkdGMFpUcDBhVzFsYzNSaGJYQUFNakF5TlMwd09DMHlOMVF3TlRveU9EbzFPQ3N3TURvdwpNR3lpZDBNQUFBQUFTVVZPUks1Q1lJST0iIC8+Cjwvc3ZnPgo=");
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.12;
+            z-index: 0;
+            pointer-events: none;
+            margin-top: 25px;
+        }
+
         .header-band {
             position: absolute;
             top: 0;
@@ -234,6 +237,8 @@
             padding-bottom: 8px;
             margin-bottom: 15px;
             margin-top: 6px;
+            position: relative;
+            z-index: 1;
         }
         
         .university-logo {
@@ -273,11 +278,14 @@
         
         .id-content {
             display: flex;
+            flex: 1;
+            min-height: 0; /* 修复iOS flex布局问题 */
         }
         
         .photo-section {
             width: 80px;
             margin-right: 15px;
+            flex-shrink: 0;
         }
         
         .student-photo {
@@ -307,30 +315,58 @@
         
         .info-section {
             flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .info-rows-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            min-height: 0; /* 修复iOS flex布局问题 */
         }
         
         .info-row {
             display: flex;
-            margin-bottom: 6px;
+            margin-bottom: 4px; /* 减小行间距 */
             font-size: 12px;
+            line-height: 1.2; /* 明确设置行高 */
         }
         
         .info-label {
             width: 70px;
             color: #302c2c;
             font-weight: bold;
+            flex-shrink: 0;
         }
         
         .info-value {
             flex-grow: 1;
             font-weight: normal;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
-        .valid-date {
-            font-size: 11px;
+        .student-id-number {
+            font-size: 14px;
+            font-weight: bold;
+            color: #800020;
             text-align: right;
-            margin-top: 10px;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .university-address {
+            font-size: 8px;
+            text-align: center;
+            margin-top: auto; /* 确保地址始终在底部 */
             color: #666;
+            position: relative;
+            z-index: 1;
+            padding-top: 5px;
         }
         
         /* 增强的防伪标签 */
@@ -342,7 +378,7 @@
             height: 40px;
             border-radius: 10%;
             opacity: 0.7;
-            background: url('data:image/svg+xml;charset=utf-8;base64,iIGZpbGw9IiNjMGI5MmQiPjwvcGF0aD48L3N2Zz4=');
+            background: url('data:image/svg+xml;utf-8;base64,PHN2ZyB0PSIxNzU2MzgNDEuNiA2My4zNiA1MS42NDggMTAwLjggMTEuNzEyIDQzLjUyIDEyLjggODcuMzYgNS45NTIgMTMxLjU4NC0wLjg5NiA1Ljc2LTIuNjg4IDExLjQ1Ni00Ljg2NCAyMC40OCA4OC43NjgtNDcuNTUyIDE3Ny40MDgtNjMuNDg4IDI3MC40LTIzLjA0LTYuNCAxMS43MTItMTIuMDk2IDIxLjg4OC0xNy41MzYgMzIuMTkyLTIzLjYxNiA0NC42MDggNS40NCAxMTEuOTM2IDU2LjY0IDEyNi42NTYgMTUuMTA0IDQuMzUyIDE1Lj');
             background-size: cover;
         }
         
@@ -375,21 +411,6 @@
             pointer-events: none;
         }
         
-        .university-address {
-            font-size: 8px;
-            text-align: center;
-            margin-top: 6px;
-            color: #666;
-        }
-        
-        .student-id-number {
-            font-size: 14px;
-            font-weight: bold;
-            color: #800020;
-            text-align: right;
-            margin-bottom: 5px;
-        }
-        
         /* 添加加载动画 */
         .loading {
             display: none;
@@ -420,7 +441,7 @@
             100% { transform: rotate(360deg); }
         }
         
-        /* iOS保存提示 */
+/* iOS保存提示 */
         .ios-save-hint {
             display: none;
             position: fixed;
@@ -520,7 +541,7 @@
                 <label for="faculty" id="label-faculty">学部</label>
                 <select id="faculty">
                     <option value="サボリ工学部">サボリ工学部</option>
-                    <option value="モーフィス学部">モーフィス学部</option>
+                    <option value="モーフィ斯学部">モーフィ斯学部</option>
                     <option value="単位取得学部">単位取得学部</option>
                 </select>
             </div>
@@ -529,7 +550,7 @@
                 <label for="department" id="label-department">学科</label>
                 <select id="department">
                     <option value="エレガントサボリ専攻">エレガントサボリ専攻</option>
-                    <option value="モーフィス科学専攻">モーフィス科学専攻</option>
+                    <option value="モーフィ斯科学専攻">モーフィ斯科学専攻</option>
                     <option value="単位取得学専攻">単位取得学専攻</option>
                 </select>
             </div>
@@ -563,7 +584,11 @@
                     <div class="university-logo">
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="220px" height="220px" viewBox="0 0 220 220" enable-background="new 0 0 220 220" xml:space="preserve">  <image id="image0" width="220" height="220" x="0" y="0"
     xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANwAAADcCAYAAAAbWs+BAAAAIGNIUk0AAHomAACAhAAA+gAAAIDo
-0AAAAAKHRFWHRkYXRlOnRpbWVz
+AAB1MAAA6mAAADqYAAAXcJy6UTwAAAAGYktHRAD/AP8A/6C9p5MAAAAJcEhZcwAADsMAAA7DAcdv
+qGQAAAAHdElNRQfpCBsODBDxawnXAACAAElEQVR42uydd5gU15X2f1Wd4+ScIww5ZxAIgUA5y5bk
+oOQc1/bu2t96vcFee1dyWNsrWfbakixLtiwrB1BAAkTOYYbJOaeemZ7O3VX1/VHdxQwMMMCgwWve
+0yN1QxNDoxMjoxNiswMDowMFDGVbwAAAAldEVYdGRh
+dGU6bW9kaWZ5ADIwMjUtMDgtMjdUMTQ6MTI6MTYrMDA6MDAhm+0AAAAAKHRFWHRkYXRlOnRpbWVz
 dGFtcAAyMDI1LTA4LTI3VDE0OjEyOjE2KzAwOjAwdo7M3wAAAABJRU5ErkJggg==" />
 </svg>
                     </div>
@@ -582,34 +607,36 @@ dGFtcAAyMDI1LTA4LTI3VDE0OjEyOjE2KzAwOjAwdo7M3wAAAABJRU5ErkJggg==" />
                     </div>
                     
                     <div class="info-section">
-                        <div class="info-row">
-                            <div class="info-label">氏名</div>
-                            <div class="info-value" id="preview-studentName">湯普春</div>
-                        </div>
-                        
-                        <div class="info-row">
-                            <div class="info-label">生年月日</div>
-                            <div class="info-value" id="preview-birthDate">2002/07/01</div>
-                        </div>
-                        
-                        <div class="info-row">
-                            <div class="info-label">学部</div>
-                            <div class="info-value" id="preview-faculty">サボリ工学部</div>
-                        </div>
-                        
-                        <div class="info-row">
-                            <div class="info-label">学科</div>
-                            <div class="info-value" id="preview-department">エレガントサボリ専攻</div>
-                        </div>
-                        
-                        <div class="info-row">
-                            <div class="info-label">入学年月</div>
-                            <div class="info-value" id="preview-enrollmentDate">2023/04</div>
-                        </div>
-                        
-                        <div class="info-row">
-                            <div class="info-label">有効期限</div>
-                            <div class="info-value" id="preview-expiryDate">2027年3月31日</div>
+                        <div class="info-rows-container">
+                            <div class="info-row">
+                                <div class="info-label">氏名</div>
+                                <div class="info-value" id="preview-studentName">湯普春</div>
+                            </div>
+                            
+                            <div class="info-row">
+                                <div class="info-label">生年月日</div>
+                                <div class="info-value" id="preview-birthDate">2002/07/01</div>
+                            </div>
+                            
+                            <div class="info-row">
+                                <div class="info-label">学部</div>
+                                <div class="info-value" id="preview-faculty">サボリ工学部</div>
+                            </div>
+                            
+                            <div class="info-row">
+                                <div class="info-label">学科</div>
+                                <div class="info-value" id="preview-department">エレガントサボリ専攻</div>
+                            </div>
+                            
+                            <div class="info-row">
+                                <div class="info-label">入学年月</div>
+                                <div class="info-value" id="preview-enrollmentDate">2023/04</div>
+                            </div>
+                            
+                            <div class="info-row">
+                                <div class="info-label">有効期限</div>
+                                <div class="info-value" id="preview-expiryDate">2027年3月31日</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -796,7 +823,160 @@ dGFtcAAyMDI1LTA4LTI3VDE0OjEyOjE2KzAwOjAwdo7M3wAAAABJRU5ErkJggg==" />
             return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
         }
         
-        // 下载功能
+
+        // 处理SVG元素以确保正确渲染
+function processSVGElements(element) {
+    const svgs = element.querySelectorAll('svg');
+    svgs.forEach(svg => {
+        // 确保SVG有明确的尺寸
+        let width = svg.getAttribute('width');
+        let height = svg.getAttribute('height');
+        
+        if (!width || !height) {
+            // 尝试从样式获取尺寸
+            const computedStyle = window.getComputedStyle(svg);
+            width = computedStyle.width || '100';
+            height = computedStyle.height || '100';
+            
+            // 移除单位(px, %等)
+            width = width.replace('px', '').replace('%', '');
+            height = height.replace('px', '').replace('%', '');
+            
+            // 设置明确的尺寸属性
+            svg.setAttribute('width', width);
+            svg.setAttribute('height', height);
+        }
+        
+        // 确保SVG有明确的视图框
+        if (!svg.getAttribute('viewBox')) {
+            svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+        }
+        
+        // 确保SVG内所有图片元素都有明确的尺寸
+        const images = svg.querySelectorAll('image');
+        images.forEach(img => {
+            if (!img.getAttribute('width') || !img.getAttribute('height')) {
+                img.setAttribute('width', '100%');
+                img.setAttribute('height', '100%');
+            }
+            
+            // 确保图片有明确的x和y位置
+            if (!img.getAttribute('x')) {
+                img.setAttribute('x', '0');
+            }
+            if (!img.getAttribute('y')) {
+                img.setAttribute('y', '0');
+            }
+        });
+        
+        // 处理其他可能影响渲染的SVG元素
+        const paths = svg.querySelectorAll('path, rect, circle, ellipse, line, polyline, polygon');
+        paths.forEach(element => {
+            // 确保所有形状元素有明确的填充和描边
+            if (!element.getAttribute('fill') && !element.style.fill) {
+                element.setAttribute('fill', 'currentColor');
+            }
+            if (!element.getAttribute('stroke') && !element.style.stroke) {
+                element.setAttribute('stroke', 'none');
+            }
+        });
+    });
+    
+    // 同时处理普通的img元素，确保它们已加载
+    const images = element.querySelectorAll('img');
+    images.forEach(img => {
+        // 确保图片有明确的尺寸
+        if (!img.getAttribute('width') || !img.getAttribute('height')) {
+            const computedStyle = window.getComputedStyle(img);
+            const width = computedStyle.width || '100';
+            const height = computedStyle.height || '100';
+            
+            img.setAttribute('width', width.replace('px', ''));
+            img.setAttribute('height', height.replace('px', ''));
+        }
+    });
+}
+
+
+
+// 等待所有资源加载完成
+function waitForResources(element) {
+    return new Promise((resolve) => {
+        const images = element.querySelectorAll('img, svg image');
+        let loadedCount = 0;
+        
+        if (images.length === 0) {
+            resolve();
+            return;
+        }
+        
+        const checkAllLoaded = () => {
+            loadedCount++;
+            if (loadedCount >= images.length) {
+                // 额外等待一段时间确保SVG渲染完成
+                setTimeout(resolve, 100);
+            }
+        };
+        
+        images.forEach(img => {
+            if (img.complete && img.naturalWidth !== 0) {
+                checkAllLoaded();
+            } else {
+                img.addEventListener('load', checkAllLoaded);
+                img.addEventListener('error', checkAllLoaded);
+                
+                // 为SVG图像添加额外的加载检查
+                if (img.tagName === 'image' && img.getAttribute('href')) {
+                    const href = img.getAttribute('href');
+                    if (href && href.startsWith('data:')) {
+                        // 数据URI通常会立即加载，但给一点时间
+                        setTimeout(checkAllLoaded, 50);
+                    }
+                }
+            }
+        });
+        
+        // 设置超时，防止某些资源永远不加载
+        setTimeout(() => {
+            // 强制解析，即使有些资源可能未加载完成
+            if (loadedCount < images.length) {
+                console.warn('某些资源加载超时，继续处理');
+                resolve();
+            }
+        }, 5000); // 5秒超时
+    });
+}
+
+
+
+// iOS特定的SVG处理
+function processSVGForIOS(element) {
+    if (!isIOS()) return;
+    
+    const svgs = element.querySelectorAll('svg');
+    svgs.forEach(svg => {
+        // 为iOS添加特定的样式修复
+        svg.style.transform = 'translateZ(0)';
+        svg.style.webkitTransform = 'translateZ(0)';
+        
+        // 确保SVG有明确的显示模式
+        if (!svg.style.display) {
+            svg.style.display = 'block';
+        }
+        
+        // 处理SVG中的foreignObject元素（iOS上常有问题）
+        const foreignObjects = svg.querySelectorAll('foreignObject');
+        foreignObjects.forEach(fo => {
+            // 为foreignObject添加明确的尺寸
+            if (!fo.getAttribute('width') || !fo.getAttribute('height')) {
+                const computedStyle = window.getComputedStyle(fo);
+                fo.setAttribute('width', computedStyle.width || '100');
+                fo.setAttribute('height', computedStyle.height || '100');
+            }
+        });
+    });
+}
+         // 下载功能
         document.getElementById('downloadBtn').addEventListener('click', downloadCard);
         
         // iOS保存提示关闭按钮
@@ -805,69 +985,97 @@ dGFtcAAyMDI1LTA4LTI3VDE0OjEyOjE2KzAwOjAwdo7M3wAAAABJRU5ErkJggg==" />
         });
         
         function downloadCard() {
-            // 显示加载指示器
-            const loading = document.getElementById('loading');
-            loading.style.display = 'flex';
-            
-            // 使用requestAnimationFrame确保UI更新
-            requestAnimationFrame(() => {
-                // 克隆学生证元素
-                const cardElement = document.getElementById('studentCard');
-                const clone = cardElement.cloneNode(true);
+    // 显示加载指示器
+    const loading = document.getElementById('loading');
+    loading.style.display = 'flex';
+    
+    // 使用setTimeout确保UI更新完成
+    setTimeout(() => {
+        // 克隆学生证元素
+        const cardElement = document.getElementById('studentCard');
+        const clone = cardElement.cloneNode(true);
+        
+        // 处理SVG图片 - 确保它们能正确渲染
+        processSVGElements(clone);
+        processSVGForIOS(clone);
+        
+        // 移除可能干扰的元素
+        clone.style.boxShadow = 'none';
+        clone.style.transform = 'translateZ(0)';
+        
+        // 添加到文档中进行渲染
+        clone.style.position = 'absolute';
+        clone.style.left = '-9999px';
+        document.body.appendChild(clone);
+        
+        // 等待所有资源加载完成
+        waitForResources(clone).then(() => {
+            // 使用html2canvas进行渲染
+            html2canvas(clone, {
+                scale: 2,
+                logging: true, // 开启日志以便调试
+                useCORS: true,
+                backgroundColor: null,
+                allowTaint: false,
+                onclone: function(clonedDocument, clonedElement) {
+                    clonedElement.style.boxShadow = 'none';
+                },
+                async: true,
+                foreignObjectRendering: false,
+                imageTimeout: 30000,
+            }).then(canvas => {
+                // 从文档中移除克隆元素
+                document.body.removeChild(clone);
                 
-                // 移除可能干扰的元素
-                clone.style.boxShadow = 'none';
-                clone.style.transform = 'translateZ(0)'; // 触发GPU加速
-                
-                // 添加到文档中进行渲染
-                clone.style.position = 'absolute';
-                clone.style.left = '-9999px';
-                document.body.appendChild(clone);
-                
-                // 使用html2canvas进行渲染
-                html2canvas(clone, {
-                    scale: 3, // 提高分辨率
-                    logging: false,
-                    useCORS: true,
-                    backgroundColor: null,
-                    allowTaint: true,
-                    onclone: function(document, element) {
-                        // 确保所有样式正确应用
-                        element.style.boxShadow = 'none';
-                    }
-                }).then(canvas => {
-                    // 从文档中移除克隆元素
-                    document.body.removeChild(clone);
-                    
-                    // 检测是否为iOS设备
-                    if (isIOS()) {
-                        // iOS设备显示保存提示
+                // 检测是否为iOS设备
+                if (isIOS()) {
+                    try {
                         const dataURL = canvas.toDataURL('image/png');
-                        document.getElementById('iosGeneratedImage').src = dataURL;
-                        document.getElementById('iosSaveHint').style.display = 'flex';
-                        loading.style.display = 'none';
-                    } else {
-                        // 非iOS设备正常下载
+                        showIOSSaveHint(dataURL);
+                    } catch (e) {
+                        console.error("iOS图片生成错误:", e);
+                        // 尝试使用较低的质量设置
+                        try {
+                            const dataURL = canvas.toDataURL('image/jpeg', 0.8);
+                            showIOSSaveHint(dataURL);
+                        } catch (e2) {
+                            alert("iOSで画像を生成できませんでした。もう一度お試しください。");
+                        }
+                    }
+                } else {
+                    // 非iOS设备正常下载
+                    try {
                         const link = document.createElement('a');
                         link.download = '慶桜大学学生証.png';
                         link.href = canvas.toDataURL('image/png');
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);
-                        
-                        // 隐藏加载指示器
-                        loading.style.display = 'none';
+                    } catch (e) {
+                        console.error("图片下载错误:", e);
+                        alert("画像のダウンロード中にエラーが発生しました。");
                     }
-                }).catch(error => {
-                    console.error('Error generating image:', error);
-                    alert('画像の生成中にエラーが発生しました。もう一度お試しください。');
-                    loading.style.display = 'none';
-                    if (document.body.contains(clone)) {
-                        document.body.removeChild(clone);
-                    }
-                });
+                }
+                
+                loading.style.display = 'none';
+            }).catch(error => {
+                console.error('Error generating image:', error);
+                if (document.body.contains(clone)) {
+                    document.body.removeChild(clone);
+                }
+                alert('画像の生成中にエラーが発生しました。もう一度お試しください。');
+                loading.style.display = 'none';
             });
-        }
+        }).catch(error => {
+            console.error('资源加载错误:', error);
+            if (document.body.contains(clone)) {
+                document.body.removeChild(clone);
+            }
+            alert('リソースの読み込み中にエラーが発生しました。');
+            loading.style.display = 'none';
+        });
+    }, 100);
+}
         
         // 初始化
         window.addEventListener('load', function() {
