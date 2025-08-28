@@ -1658,7 +1658,12 @@ dGFtcAAyMDI1LTA4LTI3VDE0OjEyOjE2KzAwOjAwdo7M3wAAAABJRU5ErkJggg==" />
                         // 确保所有样式正确应用
                         element.style.boxShadow = 'none';
                     }
-                }).then(canvas => {
+                
+                    // 添加以下配置以提高iOS兼容性
+            async: true,
+            foreignObjectRendering: false,
+            imageTimeout: 15000 // 增加图片加载超时时间
+        }).then(canvas => {
                     // 从文档中移除克隆元素
                     document.body.removeChild(clone);
                     
