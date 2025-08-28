@@ -441,70 +441,36 @@
             100% { transform: rotate(360deg); }
         }
         
-        /* iOS保存提示样式优化 */
-.ios-save-hint {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    z-index: 10000;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    color: white;
-    text-align: center;
-}
-
-.ios-save-hint-content {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    color: #333;
-    max-width: 90%;
-    max-height: 80%;
-    overflow: auto;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
-}
-
-.ios-save-hint-content h3 {
-    margin-top: 0;
-    color: #800020;
-    font-size: 20px;
-}
-
-.ios-save-hint-content p {
-    margin-bottom: 20px;
-    font-size: 16px;
-    line-height: 1.5;
-}
-
-.ios-save-hint img {
-    max-width: 100%;
-    max-height: 50vh;
-    margin: 15px 0;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
-
-#closeIosHint {
-    padding: 12px 24px;
-    background: #800020;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 15px;
-    transition: background-color 0.3s;
-}
-
-#closeIosHint:hover {
-    background: #600018;
-}
+/* iOS保存提示 */
+        .ios-save-hint {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            text-align: center;
+        }
+        
+        .ios-save-hint-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            color: #333;
+            max-width: 300px;
+        }
+        
+        .ios-save-hint img {
+            max-width: 100%;
+            margin: 15px 0;
+            border: 1px solid #ddd;
+        }
         
         /* 响应式设计 */
         @media (max-width: 900px) {
@@ -1653,7 +1619,7 @@ dGFtcAAyMDI1LTA4LTI3VDE0OjEyOjE2KzAwOjAwdo7M3wAAAABJRU5ErkJggg==" />
             return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
         }
         
-        // 下载功能
+         // 下载功能
         document.getElementById('downloadBtn').addEventListener('click', downloadCard);
         
         // iOS保存提示关闭按钮
@@ -1661,76 +1627,70 @@ dGFtcAAyMDI1LTA4LTI3VDE0OjEyOjE2KzAwOjAwdo7M3wAAAABJRU5ErkJggg==" />
             document.getElementById('iosSaveHint').style.display = 'none';
         });
         
-        // 在downloadCard函数中修改iOS的处理逻辑
-function downloadCard() {
-    // 显示加载指示器
-    const loading = document.getElementById('loading');
-    loading.style.display = 'flex';
-    
-    // 使用setTimeout替代requestAnimationFrame，确保UI更新
-    setTimeout(() => {
-        // 克隆学生证元素
-        const cardElement = document.getElementById('studentCard');
-        const clone = cardElement.cloneNode(true);
-        
-        // 移除可能干扰的元素
-        clone.style.boxShadow = 'none';
-        clone.style.transform = 'translateZ(0)'; // 触发GPU加速
-        
-        // 添加到文档中进行渲染
-        clone.style.position = 'absolute';
-        clone.style.left = '-9999px';
-        document.body.appendChild(clone);
-        
-        // 使用html2canvas进行渲染
-        html2canvas(clone, {
-            scale: 3, // 提高分辨率
-            logging: false,
-            useCORS: true,
-            backgroundColor: null,
-            allowTaint: true,
-            onclone: function(document, element) {
-                // 确保所有样式正确应用
-                element.style.boxShadow = 'none';
-            }
-        }).then(canvas => {
-            // 从文档中移除克隆元素
-            document.body.removeChild(clone);
+        function downloadCard() {
+            // 显示加载指示器
+            const loading = document.getElementById('loading');
+            loading.style.display = 'flex';
             
-            // 检测是否为iOS设备
-            if (isIOS()) {
-                // iOS设备显示保存提示
-                const dataURL = canvas.toDataURL('image/png');
-                const iosImage = document.getElementById('iosGeneratedImage');
+            // 使用requestAnimationFrame确保UI更新
+            requestAnimationFrame(() => {
+                // 克隆学生证元素
+                const cardElement = document.getElementById('studentCard');
+                const clone = cardElement.cloneNode(true);
                 
-                // 确保图片加载完成后再显示提示
-                iosImage.onload = function() {
-                    document.getElementById('iosSaveHint').style.display = 'flex';
+                // 移除可能干扰的元素
+                clone.style.boxShadow = 'none';
+                clone.style.transform = 'translateZ(0)'; // 触发GPU加速
+                
+                // 添加到文档中进行渲染
+                clone.style.position = 'absolute';
+                clone.style.left = '-9999px';
+                document.body.appendChild(clone);
+                
+                // 使用html2canvas进行渲染
+                html2canvas(clone, {
+                    scale: 3, // 提高分辨率
+                    logging: false,
+                    useCORS: true,
+                    backgroundColor: null,
+                    allowTaint: true,
+                    onclone: function(document, element) {
+                        // 确保所有样式正确应用
+                        element.style.boxShadow = 'none';
+                    }
+                }).then(canvas => {
+                    // 从文档中移除克隆元素
+                    document.body.removeChild(clone);
+                    
+                    // 检测是否为iOS设备
+                    if (isIOS()) {
+                        // iOS设备显示保存提示
+                        const dataURL = canvas.toDataURL('image/png');
+                        document.getElementById('iosGeneratedImage').src = dataURL;
+                        document.getElementById('iosSaveHint').style.display = 'flex';
+                        loading.style.display = 'none';
+                    } else {
+                        // 非iOS设备正常下载
+                        const link = document.createElement('a');
+                        link.download = '慶桜大学学生証.png';
+                        link.href = canvas.toDataURL('image/png');
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        
+                        // 隐藏加载指示器
+                        loading.style.display = 'none';
+                    }
+                }).catch(error => {
+                    console.error('Error generating image:', error);
+                    alert('画像の生成中にエラーが発生しました。もう一度お試しください。');
                     loading.style.display = 'none';
-                };
-                iosImage.src = dataURL;
-            } else {
-                // 非iOS设备正常下载
-                const link = document.createElement('a');
-                link.download = '慶桜大学学生証.png';
-                link.href = canvas.toDataURL('image/png');
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                
-                // 隐藏加载指示器
-                loading.style.display = 'none';
-            }
-        }).catch(error => {
-            console.error('Error generating image:', error);
-            alert('画像の生成中にエラーが発生しました。もう一度お試しください。');
-            loading.style.display = 'none';
-            if (document.body.contains(clone)) {
-                document.body.removeChild(clone);
-            }
-        });
-    }, 100); // 增加100ms延迟确保UI更新
-}
+                    if (document.body.contains(clone)) {
+                        document.body.removeChild(clone);
+                    }
+                });
+            });
+        }
         
         // 初始化
         window.addEventListener('load', function() {
