@@ -199,7 +199,7 @@
             width: 340px;
             height: 214px;
             background: linear-gradient(135deg, #c2b1b1f3 0%, #f7f3f3 100%);
-            border-radius: 10px;
+            border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             padding: 15px;
             position: relative;
@@ -207,6 +207,9 @@
             border: 1px solid #d0d0d0;
             display: flex;
             flex-direction: column;
+            /* 确保圆角在所有设备上都能正确显示 */
+            -webkit-mask-image: -webkit-radial-gradient(white, black);
+            transform: translateZ(0);
         }
         
         .header-band {
@@ -222,6 +225,9 @@
             padding-right: 15px;
             box-sizing: border-box;
             z-index: 2;
+            /* 修复iOS圆角问题 */
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
         }
         
         .header-band-text {
@@ -309,6 +315,7 @@
             margin-bottom: 5px;
             position: relative;
             overflow: hidden;
+            border-radius: 4px;
         }
         
         .barcode-container {
@@ -319,6 +326,7 @@
             align-items: center;
             background: rgba(255, 255, 255, 0);
             overflow: hidden;
+            border-radius: 3px;
         }
         
         .info-section {
@@ -483,12 +491,15 @@
             border: 1px solid #ddd;
         }
         
-        /* iOS特定修复 */
+        /* iOS和Mac特定修复 */
         @supports (-webkit-touch-callout: none) {
             /* CSS specific to iOS devices */
             .student-id {
                 overflow: visible;
                 padding-bottom: 20px;
+                /* 确保圆角在iOS设备上正确显示 */
+                -webkit-mask-image: none;
+                isolation: isolate;
             }
             
             .info-row {
@@ -507,6 +518,20 @@
             /* 防止iOS Safari上的字体放大 */
             input, select {
                 font-size: 16px; /* 防止iOS上的缩放 */
+            }
+            
+            /* 修复iOS上的圆角显示问题 */
+            .student-id::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                border-radius: 12px;
+                box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
+                pointer-events: none;
+                z-index: 10;
             }
         }
         
@@ -633,7 +658,7 @@
                     <div class="university-logo">
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="220px" height="220px" viewBox="0 0 220 220" enable-background="new 0 0 220 220" xml:space="preserve">  <image id="image0" width="220" height="220" x="0" y="0"
     xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANwAAADcCAYAAAAbWs+BAAAAIGNIUk0AAHomAACAhAAA+gAAAIDo
-0AAAAAKHRFWHRkYXRlOnRpbWVz
+0AAAAAKHRFWHRkYXRlOnTpbWVz
 dGFtcAAyMDI1LTA4LTI3VDE4OjEyOjE2KzAwOjAwdo7M3wAAAABJRU5ErkJggg==" />
 </svg>
                     </div>
