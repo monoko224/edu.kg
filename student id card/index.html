@@ -2241,76 +2241,69 @@ dGFtcAAyMDI1LTA4LTI3VDE0OjEyOjE2KzAwOjAwdo7M3wAAAABJRU5ErkJggg==" />
             document.getElementById('iosSaveHint').style.display = 'none';
         });
         
-        async function downloadCard() {
-    const loading = document.getElementById('loading');
-    loading.style.display = 'flex';
-    
-    try {
-        // 等待所有图片加载完成
-        await preloadImages();
-        
-        // 使用setTimeout确保UI更新
-        setTimeout(async () => {
-            // 克隆学生证元素
-            const cardElement = document.getElementById('studentCard');
-            const clone = cardElement.cloneNode(true);
+        function downloadCard() {
+            // 显示加载指示器
+            const loading = document.getElementById('loading');
+            loading.style.display = 'flex';
             
-            // 处理SVG水印
-            const originalSvg = document.querySelector('.watermark-svg');
-            if (originalSvg) {
-                const cloneSvg = clone.querySelector('.watermark-svg');
-                cloneSvg.innerHTML = originalSvg.innerHTML;
-            }
-            
-            // 移除可能干扰的元素
-            clone.style.boxShadow = 'none';
-            clone.style.transform = 'translateZ(0)';
-            
-            // 添加到文档中进行渲染
-            clone.style.position = 'absolute';
-            clone.style.left = '-9999px';
-            document.body.appendChild(clone);
-            
-            try {
-                // 使用html2canvas进行渲染，带重试机制
-                const canvas = await downloadWithRetry(clone);
+            // 使用setTimeout确保UI更新（采用111.html的方式）
+            setTimeout(() => {
+                // 克隆学生证元素
+                const cardElement = document.getElementById('studentCard');
+                const clone = cardElement.cloneNode(true);
                 
-                // 从文档中移除克隆元素
-                document.body.removeChild(clone);
+                // 移除可能干扰的元素
+                clone.style.boxShadow = 'none';
+                clone.style.transform = 'translateZ(0)'; // 触发GPU加速
                 
-                // 检测是否为iOS设备
-                if (isIOS()) {
-                    // iOS设备显示保存提示
-                    const dataURL = canvas.toDataURL('image/png');
-                    document.getElementById('iosGeneratedImage').src = dataURL;
-                    document.getElementById('iosSaveHint').style.display = 'flex';
-                    loading.style.display = 'none';
-                } else {
-                    // 非iOS设备正常下载
-                    const link = document.createElement('a');
-                    link.download = '慶桜大学学生証.png';
-                    link.href = canvas.toDataURL('image/png');
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    
-                    // 隐藏加载指示器
-                    loading.style.display = 'none';
-                }
-            } catch (error) {
-                console.error('Error generating image:', error);
-                alert('画像の生成中にエラーが発生しました。もう一度お試しください。');
-                loading.style.display = 'none';
-                if (document.body.contains(clone)) {
+                // 添加到文档中进行渲染
+                clone.style.position = 'absolute';
+                clone.style.left = '-9999px';
+                document.body.appendChild(clone);
+                
+                // 使用html2canvas进行渲染
+                html2canvas(clone, {
+                    scale: 3, // 提高分辨率
+                    logging: false,
+                    useCORS: true,
+                    backgroundColor: null,
+                    onclone: function(document, element) {
+                        // 确保所有样式正确应用
+                        element.style.boxShadow = 'none';
+                    }
+                }).then(canvas => {
+                    // 从文档中移除克隆元素
                     document.body.removeChild(clone);
-                }
-            }
-        }, 300);
-    } catch (error) {
-        console.error('Error preloading images:', error);
-        loading.style.display = 'none';
-    }
-}
+                    
+                    // 检测是否为iOS设备
+                    if (isIOS()) {
+                        // iOS设备显示保存提示
+                        const dataURL = canvas.toDataURL('image/png');
+                        document.getElementById('iosGeneratedImage').src = dataURL;
+                        document.getElementById('iosSaveHint').style.display = 'flex';
+                        loading.style.display = 'none';
+                    } else {
+                        // 非iOS设备正常下载
+                        const link = document.createElement('a');
+                        link.download = '慶桜大学学生証.png';
+                        link.href = canvas.toDataURL('image/png');
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        
+                        // 隐藏加载指示器
+                        loading.style.display = 'none';
+                    }
+                }).catch(error => {
+                    console.error('Error generating image:', error);
+                    alert('画像の生成中にエラーが発生しました。もう一度お試しください。');
+                    loading.style.display = 'none';
+                    if (document.body.contains(clone)) {
+                        document.body.removeChild(clone);
+                    }
+                });
+            }, 100); // 使用111.html中的100ms延迟
+        }
         
         // 初始化
         window.addEventListener('load', function() {
