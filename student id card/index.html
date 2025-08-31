@@ -574,11 +574,8 @@
         <div class="preview-container">
             <div class="student-id" id="studentCard">
                 <!-- 添加水印SVG元素 -->
-                <svg class="watermark-svg" viewBox="0 0 180 180" preserveAspectRatio="xMidYMid meet">
-                    <!-- 这里将放置您的SVG内容 -->
-                    <!-- 示例：<image xlink:href="data:image/svg+xml;base64,..." width="400" height="400" /> -->
-                    
-  <image id="image0" width="180" height="180" x="0" y="0"
+                 <div class="watermark-svg">
+                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="180px" height="180px" viewBox="0 0 180 180" enable-background="new 0 0 180 180" xml:space="preserve">  <image id="image0" width="180" height="180" x="0" y="0"
     xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAAIGNIUk0AAHomAACAhAAA+gAAAIDo
 AAB1MAAA6mAAADqYAAAXcJy6UTwAAAAGYktHRAD/AP8A/6C9p5MAAAAJcEhZcwAADsMAAA7DAcdv
 qGQAAAAHdElNRQfpCBsFHDpsRz2xAACAAElEQVR42uy9d3gc1dk+fM/M9l2ttkmrVe9dsiy5946x
@@ -1187,8 +1184,12 @@ lbuMK6FsI1hXSXNfH3xGI3I8j4rKSmzZ7RmNTueIr65+0zQ2vqhUqzvBWF4SBNum1crVdXbKdR0d
 TgghhBBCCCGEEEIIIYSQy+MXhqi0PDI4BGsAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjUtMDgtMjdU
 MDU6Mjg6NTcrMDA6MDC8op7JAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI1LTA4LTI3VDA1OjI4OjU3
 KzAwOjAwzf8mdQAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyNS0wOC0yN1QwNToyODo1OCswMDow
-MGyid0MAAAAASUVORK5CYII="/>
-                </svg>
+MGyid0MAAAAASUVORK5CYII=" />
+</svg>
+   
+
+                 </div>
+               
                 
                 <div class="header-band">
                     <div class="header-band-text">keio university</div>
@@ -2302,7 +2303,7 @@ dGFtcAAyMDI1LTA4LTI3VDE0OjEyOjE2KzAwOjAwdo7M3wAAAABJRU5ErkJggg==" />
                         document.body.removeChild(clone);
                     }
                 });
-            }, 100); // 使用111.html中的100ms延迟
+            }, 300); // 使用111.html中的100ms延迟
         }
         
         // 初始化
