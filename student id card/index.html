@@ -172,7 +172,7 @@
             text-align: center;
             margin-top: 15px;
             color: #666;
-            font-size: 14px;
+            font-size: 12px;
             max-width: 350px;
         }
         
@@ -411,7 +411,7 @@
             right: 15px;
             font-size: 40px;
             font-weight: bold;
-            opacity: 0.9;
+            opacity: 0.85;
             color: #800020;
             transform: rotate(0deg);
             pointer-events: none;
@@ -478,6 +478,29 @@
             border: 1px solid #ddd;
         }
         
+        /* 学号生成按钮样式 */
+        .student-number-container {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .student-number-container input {
+            flex: 1;
+        }
+        
+        .btn-generate {
+            background-color: #4a6fa5;
+            color: white;
+            white-space: nowrap;
+            padding: 10px 12px;
+        }
+        
+        .btn-generate:hover {
+            background-color: #3a5a8c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
         /* 响应式设计 */
         @media (max-width: 900px) {
             .container {
@@ -512,6 +535,15 @@
             .student-id {
                 transform: scale(0.9);
             }
+            
+            .student-number-container {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .btn-generate {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -530,7 +562,10 @@
         <div class="form-container">
             <div class="form-group">
                 <label for="studentNumber" id="label-studentNumber">学籍番号</label>
-                <input type="text" id="studentNumber" value="88888888">
+                <div class="student-number-container">
+                    <input type="text" id="studentNumber" value="" readonly>
+                    <button class="btn-generate" id="generateNumberBtn">生成</button>
+                </div>
             </div>
             
             <div class="form-group">
@@ -568,7 +603,7 @@
             
             <div class="form-group">
                 <label for="expiryDate" id="label-expiryDate">有効期限</label>
-                <input type="date" id="expiryDate" value="2027-03-31">
+                <input type="date" id="expiryDate" value="2029-03-31">
             </div>
             
             <div class="action-buttons">
@@ -601,7 +636,7 @@
                     <div class="student-id-text">学生証 <span class="english-text">Student ID Card</span></div>
                 </div>
                 
-                <div class="student-id-number">学籍番号: <span id="preview-studentNumber">23145012</span></div>
+                <div class="student-id-number">学籍番号: <span id="preview-studentNumber"></span></div>
                 
                 <div class="id-content">
                     <div class="photo-section">
@@ -635,12 +670,12 @@
                             
                             <div class="info-row">
                                 <div class="info-label">入学年月</div>
-                                <div class="info-value" id="preview-enrollmentDate">2023/04</div>
+                                <div class="info-value" id="preview-enrollmentDate"></div>
                             </div>
                             
                             <div class="info-row">
                                 <div class="info-label">有効期限</div>
-                                <div class="info-value" id="preview-expiryDate">2027年3月31日</div>
+                                <div class="info-value" id="preview-expiryDate">2029年3月31日</div>
                             </div>
                         </div>
                     </div>
@@ -684,6 +719,11 @@
             (navigator.userAgent.includes("Mac") && "ontouchend" in document);
         }
         
+        // 生成随机8位学号
+        function generateStudentNumber() {
+            return Math.floor(10000000 + Math.random() * 90000000).toString();
+        }
+        
         // 语言切换功能
         document.getElementById('lang-ja').addEventListener('click', function() {
             setLanguage('ja');
@@ -712,7 +752,8 @@
                     'updateBtn': '学生証を更新',
                     'downloadBtn': '画像をダウンロード',
                     'downloadInfo': '高品質のPNG画像としてダウンロードされます。防伪要素と透かしが含まれています。',
-                    'loadingText': '画像を生成中...'
+                    'loadingText': '画像を生成中...',
+                    'generateNumberBtn': '生成'
                 },
                 'zh': {
                     'title': '庆樱大学学生证生成服务',
@@ -727,7 +768,8 @@
                     'updateBtn': '更新学生证',
                     'downloadBtn': '下载图片',
                     'downloadInfo': '将下载为高质量的PNG图片，包含防伪元素和水印。',
-                    'loadingText': '图片生成中...'
+                    'loadingText': '图片生成中...',
+                    'generateNumberBtn': '生成'
                 }
             };
             
@@ -740,6 +782,13 @@
         
         // 更新学生证预览
         document.getElementById('updateBtn').addEventListener('click', updateStudentCard);
+        
+        // 生成学号按钮事件
+        document.getElementById('generateNumberBtn').addEventListener('click', function() {
+            const newNumber = generateStudentNumber();
+            document.getElementById('studentNumber').value = newNumber;
+            updateStudentCard();
+        });
         
         function updateStudentCard() {
             // 获取表单值
