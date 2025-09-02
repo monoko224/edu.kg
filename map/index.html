@@ -381,52 +381,9 @@
                 display: block;
             }
         }
-        
-        /* 初始化提示 */
-        .init-message {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            flex-direction: column;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .init-message p {
-            margin-bottom: 20px;
-            font-size: 18px;
-        }
-        
-        .init-message button {
-            background: #d4af37;
-            color: #333;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
-    <div class="init-message" id="initMessage">
-        <p class="ja-text">慶桜大学キャンパスマップへようこそ！双指でズームやパンができます。</p>
-        <p class="zh-text" style="display:none">欢迎使用庆樱大学校园地图！您可以用双指缩放和移动地图。</p>
-        <button id="closeInitMessage">
-            <span class="ja-text">開始する</span>
-            <span class="zh-text" style="display:none">开始</span>
-        </button>
-    </div>
-
     <header>
         <h1 id="header-title">慶桜大学キャンパスマップ</h1>
         <p id="header-subtitle">エレガントなサボリとモーフィスの最高学府</p>
@@ -775,12 +732,21 @@
         });
         
         // 触摸事件处理
+        let touchStartTime = 0;
+        let touchStartX = 0;
+        let touchStartY = 0;
+        
         mapContainer.addEventListener('touchstart', (e) => {
             if (e.touches.length === 1) {
                 // 单指拖动
                 isDragging = true;
                 startX = e.touches[0].clientX - posX;
                 startY = e.touches[0].clientY - posY;
+                
+                // 记录触摸开始时间和位置，用于判断是否是点击
+                touchStartTime = Date.now();
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
             } else if (e.touches.length === 2) {
                 // 双指缩放
                 isDragging = false;
@@ -846,6 +812,27 @@
         });
         
         mapContainer.addEventListener('touchend', (e) => {
+            // 检查是否是点击事件
+            if (e.touches.length === 0 && isDragging) {
+                const touch = e.changedTouches[0];
+                const touchTime = Date.now();
+                const touchDuration = touchTime - touchStartTime;
+                const deltaX = touch.clientX - touchStartX;
+                const deltaY = touch.clientY - touchStartY;
+                const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                
+                // 如果是短距离点击（不是拖动）
+                if (touchDuration < 300 && distance < 10) {
+                    // 获取点击的元素
+                    const element = document.elementFromPoint(touch.clientX, touch.clientY);
+                    if (element && element.closest('.building')) {
+                        const building = element.closest('.building');
+                        const buildingId = building.getAttribute('data-building');
+                        showBuildingInfo(buildingId);
+                    }
+                }
+            }
+            
             if (e.touches.length === 0) {
                 isDragging = false;
                 initialTouches = [];
@@ -995,11 +982,6 @@
         
         document.getElementById('lang-zh').addEventListener('click', () => {
             changeLanguage('zh');
-        });
-        
-        // 关闭初始化提示
-        document.getElementById('closeInitMessage').addEventListener('click', () => {
-            document.getElementById('initMessage').style.display = 'none';
         });
         
         // 页面加载时初始化
