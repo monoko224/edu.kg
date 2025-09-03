@@ -258,7 +258,7 @@
             display: flex;
             justify-content: center;
             margin: 15px 0;
-            gap: 10px;
+            gap: 15px;
         }
         
         .map-btn {
@@ -404,10 +404,7 @@
                 <span class="ja-text">縮小</span>
                 <span class="zh-text" style="display:none">缩小</span>
             </button>
-            <button class="map-btn" id="reset-map">
-                <span class="ja-text">リセット</span>
-                <span class="zh-text" style="display:none">重置</span>
-            </button>
+           
             <button class="map-btn" id="fit-map">
                 <span class="ja-text">全体表示</span>
                 <span class="zh-text" style="display:none">全图显示</span>
@@ -651,7 +648,7 @@
             'library': {
                 name: { 'ja': '図書館', 'zh': '图书馆' },
                 description: { 
-                    'ja': '勉強するふりをしながら実際にはサボる技術を学ぶ施設。見かけは真面目な学生でも、内心はどうサボるかを考えているのが慶桜流。',
+                    'ja': '勉強するふりをしながら実際にはサボる技術を學ぶ施設。見かけは真面目な学生でも、内心はどうサボるかを考えているのが慶桜流。',
                     'zh': '学习假装学习实则翘课技术的设施。外表是认真学生，内心却在思考如何翘课，这就是庆樱风格。'
                 }
             },
@@ -686,23 +683,21 @@
         
         // 初始化地图
         function initMap() {
-            // 设置初始缩放以适应容器
-            if (window.innerWidth <= 768) {
-                // 移动端初始缩放
-                const containerWidth = mapContainer.clientWidth;
-                const containerHeight = mapContainer.clientHeight;
-                
-                const scaleX = containerWidth / 1000;
-                const scaleY = containerHeight / 800;
-                
-                scale = Math.min(scaleX, scaleY) * 0.9; // 稍微缩小一点以便看到全貌
-                
-                // 居中显示
-                posX = (containerWidth - 1000 * scale) / 2;
-                posY = (containerHeight - 800 * scale) / 2;
-                
-                updateMapTransform();
-            }
+            const containerWidth = mapContainer.clientWidth;
+            const containerHeight = mapContainer.clientHeight;
+            
+            // 计算适合容器的缩放比例
+            const scaleX = containerWidth / 1000;
+            const scaleY = containerHeight / 800;
+            
+            // 选择较小的缩放比例以确保地图完全可见
+            scale = Math.min(scaleX, scaleY) * 0.95; // 稍微缩小一点以便看到边框
+            
+            // 居中显示
+            posX = (containerWidth - 1000 * scale) / 2;
+            posY = (containerHeight - 800 * scale) / 2;
+            
+            updateMapTransform();
         }
         
         // 更新地图变换
@@ -847,35 +842,43 @@
             }
         });
         
-        // 鼠标滚轮缩放
-        mapContainer.addEventListener('wheel', (e) => {
-            e.preventDefault();
-            
-            // 计算缩放因子
-            const zoomIntensity = 0.1;
-            const wheel = e.deltaY < 0 ? 1 : -1;
-            const zoomFactor = Math.exp(wheel * zoomIntensity);
-            const newScale = scale * zoomFactor;
-            
-            // 限制缩放范围
-            if (newScale < 0.2 || newScale > 3) return;
-            
-            // 计算缩放中心点
-            const rect = mapContainer.getBoundingClientRect();
-            const mouseX = e.clientX - rect.left;
-            const mouseY = e.clientY - rect.top;
-            
-            // 计算鼠标在地图上的位置
-            const mapX = (mouseX - posX) / scale;
-            const mapY = (mouseY - posY) / scale;
-            
-            // 更新缩放和位置
-            scale = newScale;
-            posX = mouseX - mapX * scale;
-            posY = mouseY - mapY * scale;
-            
-            updateMapTransform();
-        });
+        // 鼠标滚轮事件处理 - 根据设备类型区别处理
+        if (!('ontouchstart' in window)) {
+            // PC端：禁止滚轮缩放
+            mapContainer.addEventListener('wheel', (e) => {
+                e.preventDefault(); // 阻止默认滚动行为但不进行缩放
+            });
+        } else {
+            // 移动端：保留原有的滚轮缩放逻辑
+            mapContainer.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                
+                // 计算缩放因子
+                const zoomIntensity = 0.1;
+                const wheel = e.deltaY < 0 ? 1 : -1;
+                const zoomFactor = Math.exp(wheel * zoomIntensity);
+                const newScale = scale * zoomFactor;
+                
+                // 限制缩放范围
+                if (newScale < 0.2 || newScale > 3) return;
+                
+                // 计算缩放中心点
+                const rect = mapContainer.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+                
+                // 计算鼠标在地图上的位置
+                const mapX = (mouseX - posX) / scale;
+                const mapY = (mouseY - posY) / scale;
+                
+                // 更新缩放和位置
+                scale = newScale;
+                posX = mouseX - mapX * scale;
+                posY = mouseY - mapY * scale;
+                
+                updateMapTransform();
+            });
+        }
         
         // 控制按钮功能
         document.getElementById('zoom-in').addEventListener('click', () => {
@@ -888,12 +891,7 @@
             updateMapTransform();
         });
         
-        document.getElementById('reset-map').addEventListener('click', () => {
-            scale = 1;
-            posX = 0;
-            posY = 0;
-            updateMapTransform();
-        });
+       
         
         document.getElementById('fit-map').addEventListener('click', () => {
             initMap();
